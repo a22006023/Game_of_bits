@@ -53,7 +53,10 @@ public class GameManager {
         }
 
         for (String[] strings : playerInfo) {
-            languages = strings[2].split("; ");
+            languages = strings[2].split(";");
+            for(int b = 0;b< languages.length;b++){
+                languages[b] = languages[b].trim();
+            }
             TreeSet<String> tree = new TreeSet<>(Arrays.asList(languages));
             switch (strings[3]) {
                 case "Green" -> color = ProgrammerColor.GREEN;
