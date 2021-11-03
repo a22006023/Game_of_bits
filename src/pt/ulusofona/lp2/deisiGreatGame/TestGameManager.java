@@ -1,20 +1,12 @@
 package pt.ulusofona.lp2.deisiGreatGame;
 
 import org.junit.Test;
-
-
 import static org.junit.Assert.*;
 
 public class TestGameManager {
 
     @Test
-    public void test01() {
-
-        //TreeSet<String> languages = new TreeSet<>();
-        //languages.add("Java");
-        //languages.add("PHP");
-        //ProgrammerColor color = ProgrammerColor.PURPLE;
-        //Programmer programmer = new Programmer("sranene",3,languages , color);
+    public void test01CreateInitialBoard() {
 
         String[][] playerInfo ={
                 {"28","sranene", "PHP; Java", "Purple"},
