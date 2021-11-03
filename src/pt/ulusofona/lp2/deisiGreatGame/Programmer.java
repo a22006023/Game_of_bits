@@ -53,7 +53,7 @@ public class Programmer {
             aux++;
             languages.append(language).append("; ");
         }
-        /*falta:
+        /*
         Nota: Para programadores que saiam do
         jogo, <Pos> deve ter a posição onde
         estavam quando perderam o jogo.
@@ -67,7 +67,7 @@ public class Programmer {
         saído do jogo).
         */
 
-        return id + " | " + name + " | " + pos + " | " + languages;
+        return id + " | " + name + " | " + pos + " | " + languages + " | Em Jogo";
     }
 
 
