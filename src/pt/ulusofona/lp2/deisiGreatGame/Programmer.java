@@ -47,7 +47,7 @@ public class Programmer {
         int aux = 0;
         for(String language : this.languages) {
             if (this.languages.size()-1 == aux) {
-                languages.append(language);
+                languages.append(" ").append(language);
                 break;
             }
             aux++;
