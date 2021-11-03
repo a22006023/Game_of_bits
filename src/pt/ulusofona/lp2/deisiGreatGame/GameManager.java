@@ -102,7 +102,13 @@ public class GameManager {
     }
 
     public ArrayList<Programmer> getProgrammers() {
-        return board.get(1);
+        ArrayList<Programmer> programmers = new ArrayList<>();
+        for(int x = 1; x< board.size();x++){
+            if(!(board.get(x).isEmpty())){
+                programmers.addAll(board.get(x));
+            }
+        }
+        return programmers;
     }
 
     public ArrayList<Programmer> getProgrammers(int position) {
