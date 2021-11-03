@@ -7,7 +7,7 @@ public class Programmer {
     TreeSet<String> languages;
     int id;
     ProgrammerColor color;
-    int pos;
+    int pos = 1;
 
     Programmer(String name, TreeSet<String> languages, int id, ProgrammerColor color) {
         this.name = name;
@@ -28,16 +28,30 @@ public class Programmer {
         return color;
     }
 
+    public int getPos(){
+        return pos;
+    }
+
+    public int movePlayer(int nrCasas){
+        int sub;
+        pos += nrCasas;
+        if(pos > GameManager.board.size()){
+            sub = pos-GameManager.board.size();
+            pos -= sub;
+        }
+        return pos;
+    }
+
     public String toString() {
-        String languages = "";
+        StringBuilder languages = new StringBuilder();
         int aux = 0;
         for(String language : this.languages) {
             if (this.languages.size() == aux) {
-                languages += language;
+                languages.append(language);
                 break;
             }
             aux++;
-            languages += language + "; ";
+            languages.append(language).append("; ");
         }
         /*falta:
         Nota: Para programadores que saiam do

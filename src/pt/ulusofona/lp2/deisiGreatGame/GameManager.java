@@ -1,14 +1,16 @@
 package pt.ulusofona.lp2.deisiGreatGame;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.TreeMap;
+import java.util.TreeSet;
 import javax.swing.*;
 
 public class GameManager {
     Programmer currentPlayer;
     ProgrammerColor color;
     ArrayList<Programmer> players;
-    TreeMap<Integer,ArrayList<Programmer>> board = new TreeMap<>();
+    static TreeMap<Integer,ArrayList<Programmer>> board = new TreeMap<>();
 
     public GameManager() {}
 
@@ -18,6 +20,8 @@ public class GameManager {
 
     public boolean createInitialBoard(String[][] playerInfo, int boardSize) {
         String checkId = "ppl";
+        String[] languages;
+        TreeSet<String> tree = new TreeSet<>();
         int jogadores = playerInfo.length / 4;
 
         if (jogadores < 2 || jogadores > 4) {
@@ -28,14 +32,9 @@ public class GameManager {
             return false;
         }
 
-        for (int x = 0; x < jogadores - 1; x++) {
-            if (playerInfo[x][0].equals(checkId) || Integer.parseInt(playerInfo[x][0]) < 0) {
-                return false;
-            } else {
-                checkId = playerInfo[x][0];
-            }
+        for (int x = 0; x < jogadores; x++) {
 
-            if (playerInfo[x][1].equals("") || playerInfo[x][1] == null) {
+            if (playerInfo[x][1].equals("") || playerInfo[x][1] == null || playerInfo[x][1].equals(" ")) {
                 return false;
             }
 
@@ -46,18 +45,36 @@ public class GameManager {
                 return false;
             }
 
-            for (int y = x + 1; y < jogadores - 2; y++) {
-                if (playerInfo[x][3].equals(playerInfo[y][3])) {
+            for (int y = x + 1; y < jogadores ; y++) {
+                if(Integer.parseInt(playerInfo[x][0]) < 0 || playerInfo[x][0] == null){
+                    return false;
+                }else if(x == jogadores-1){
+                    break;
+                }else if(playerInfo[x][0].equals(playerInfo[y][0])){
+                    return false;
+                }else if (playerInfo[x][3].equals(playerInfo[y][3])) {
                     return false;
                 }
             }
         }
 
+        for (int x = 0; x < jogadores; x++){
+            languages = playerInfo[x][2].split(";");
+            tree.clear();
+            tree.addAll(Arrays.asList(languages));
+            switch (playerInfo[x][3]){
+                case "Green" -> color = ProgrammerColor.GREEN;
+                case "Blue" -> color = ProgrammerColor.BLUE;
+                case "Brown" -> color = ProgrammerColor.BROWN;
+                case "Purple" -> color = ProgrammerColor.PURPLE;
+            }
 
+            players.add(new Programmer(playerInfo[x][1],tree,Integer.parseInt(playerInfo[x][0]),color));
+        }
+        board.put(1,players);
         for(int x = 2; x <= boardSize; x++){
             board.put(x,null);
         }
-        /*still stuff to do*/
         return true;
     }
 
@@ -98,12 +115,15 @@ public class GameManager {
         if (nrPositions < 1 || nrPositions > 6) {
             return false;
         }
-        /*incompleto*/
-        return false;
+        board.get(currentPlayer.getPos()).remove(currentPlayer);
+
+        board.get(currentPlayer.movePlayer(nrPositions)).add(currentPlayer);
+
+        return true;
     }
 
     public boolean gameIsOver() {
-        return false;
+        return !(board.get(board.size()).isEmpty());
     }
 
     public ArrayList<String> getGameResults() {
