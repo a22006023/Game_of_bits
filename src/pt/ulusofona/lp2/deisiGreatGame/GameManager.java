@@ -14,6 +14,8 @@ public class GameManager {
 
     Node tail = null;
 
+    int nrTurnos = 0;
+
     public boolean createInitialBoard(String[][] playerInfo, int boardSize) {
         String[] languages;
         ArrayList<Programmer> players = new ArrayList<>();
@@ -138,6 +140,8 @@ public class GameManager {
 
         board.get(currentPlayer.getPos()).add(currentPlayer);
 
+        nrTurnos +=1;
+
         head = head.next;
 
         tail = tail.next;
@@ -151,7 +155,23 @@ public class GameManager {
 
     public ArrayList<String> getGameResults() {
 
-        return null;
+        ArrayList<String> results = new ArrayList<>();
+        ArrayList<Programmer> programmers;
+        programmers = getProgrammers();
+        programmers.remove(board.get(board.size()).get(0));
+        programmers.sort(Comparator.comparing(Programmer::getPos).reversed());
+
+        results.add("O GRANDE JOGO DO DEISI");
+
+        results.add("NR. DE TURNOS\n" + nrTurnos);
+        results.add("VENCEDOR\n " + board.get(board.size()).get(0).name);
+        StringBuilder temp = new StringBuilder("RESTANTES\n");
+        for (Programmer programmer : programmers){
+            temp.append(programmer.name).append(" ").append(programmer.pos).append("\n");
+        }
+        results.add(temp.toString());
+
+        return results;
     }
 
     public JPanel getAuthorsPanel() {
