@@ -118,7 +118,7 @@ public class GameManager {
 
     public ArrayList<Programmer> getProgrammers() {
         ArrayList<Programmer> programmers = new ArrayList<>();
-        for(int x = 1; x < board.size(); x++){
+        for(int x = 1; x <= board.size(); x++){
             if(!(board.get(x).isEmpty())){
                 programmers.addAll(board.get(x));
             }
@@ -188,7 +188,7 @@ public class GameManager {
         for (Programmer programmer : programmers){
             results.add(programmer.name + " " + programmer.pos);
         }
-
+        results.add(" ");
         return results;
     }
 
