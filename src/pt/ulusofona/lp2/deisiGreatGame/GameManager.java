@@ -175,11 +175,9 @@ public class GameManager {
         programmers.sort(Comparator.comparing(Programmer::getPos).reversed());
 
         results.add("O GRANDE JOGO DO DEISI");
-
         results.add(" ");
-
         results.add("NR. DE TURNOS");
-        results.add(""+nrTurnos);
+        results.add("" + nrTurnos);
         results.add(" ");
         results.add("VENCEDOR");
         results.add(board.get(board.size()).get(0).name);
