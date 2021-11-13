@@ -1,5 +1,6 @@
 package pt.ulusofona.lp2.deisiGreatGame;
 
+import java.awt.*;
 import java.util.*;
 import javax.swing.*;
 
@@ -192,17 +193,23 @@ public class GameManager {
 
     public JPanel getAuthorsPanel() {
 
-       /* JPanel bigFrame = new JPanel();
+        JFrame f = new JFrame("Créditos");
+        JPanel panel = new JPanel();
 
-        JFrame frame = new JFrame("Créditos");
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        frame.setBounds(500, 500, 300, 300);
-        frame.setResizable(false);
-        frame.setVisible(true);
+        JLabel jlabel1 = new JLabel("Inês Marques - a22001936");
+        JLabel jlabel2 = new JLabel("Robert Cachapa - a22006023");
 
+        panel.setBounds(40,80,200,200);
+        panel.setBackground(Color.white);
 
-        return bigFrame;*/
-        return null;
+        panel.add(jlabel1);
+        panel.add(jlabel2);
+        f.add(panel);
+        f.setSize(300,300);
+        f.setLayout(null);
+        f.setVisible(true);
+
+        return panel;
     }
 
 }
