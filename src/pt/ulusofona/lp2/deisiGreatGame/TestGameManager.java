@@ -201,7 +201,7 @@ public class TestGameManager {
 
         assertFalse(GameManager.getImagePng(24).equals("playerPurple.png"));
         assertTrue(GameManager.getImagePng(30).equals("glory.png"));
-        assertEquals(GameManager.getImagePng(9).equals("blank.png"));
+        assertEquals("blank.png", GameManager.getImagePng(9));
 
     }
 
