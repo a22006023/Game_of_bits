@@ -8,9 +8,10 @@ import javax.swing.*;
 public class GameManager {
     Programmer currentPlayer;
     ProgrammerColor color;
-    static TreeMap<Integer,ArrayList<Programmer>> board = new TreeMap<>();
+    static TreeMap<Integer, ArrayList<Programmer>> board = new TreeMap<>();
 
-    public GameManager() {}
+    public GameManager() {
+    }
 
     Node head = null;
 
@@ -22,7 +23,7 @@ public class GameManager {
         String[] languages;
         board.clear();
         currentPlayer = null;
-        if(head != null) {
+        if (head != null) {
             if (head.next.next != null && head.next.next != tail) {
                 head.next.next = null;
             }
@@ -57,14 +58,14 @@ public class GameManager {
                 return false;
             }
 
-            for (int y = x + 1; y < jogadores ; y++) {
-                if(Integer.parseInt(playerInfo[x][0]) < 0 || playerInfo[x][0] == null){
+            for (int y = x + 1; y < jogadores; y++) {
+                if (Integer.parseInt(playerInfo[x][0]) < 0 || playerInfo[x][0] == null) {
                     return false;
-                }else if(x == jogadores-1){
+                } else if (x == jogadores - 1) {
                     break;
-                }else if(playerInfo[x][0].equals(playerInfo[y][0])){
+                } else if (playerInfo[x][0].equals(playerInfo[y][0])) {
                     return false;
-                }else if (playerInfo[x][3].equals(playerInfo[y][3])) {
+                } else if (playerInfo[x][3].equals(playerInfo[y][3])) {
                     return false;
                 }
             }
@@ -72,7 +73,7 @@ public class GameManager {
 
         for (String[] strings : playerInfo) {
             languages = strings[2].split(";");
-            for(int b = 0; b < languages.length; b++){
+            for (int b = 0; b < languages.length; b++) {
                 languages[b] = languages[b].trim();
             }
             TreeSet<String> tree = new TreeSet<>(Arrays.asList(languages));
@@ -97,9 +98,9 @@ public class GameManager {
             tail = newNode;
         }
         tail.next = head;
-        board.put(1,players);
-        for(int x = 2; x <= boardSize; x++){
-            board.put(x,new ArrayList<>());
+        board.put(1, players);
+        for (int x = 2; x <= boardSize; x++) {
+            board.put(x, new ArrayList<>());
         }
         return true;
     }
@@ -155,7 +156,7 @@ public class GameManager {
 
         board.get(currentPlayer.getPos()).add(currentPlayer);
 
-        nrTurnos +=1;
+        nrTurnos += 1;
 
         head = head.next;
 
@@ -185,7 +186,7 @@ public class GameManager {
         results.add(board.get(board.size()).get(0).name);
         results.add("");
         results.add("RESTANTES");
-        for (Programmer programmer : programmers){
+        for (Programmer programmer : programmers) {
             results.add(programmer.name + " " + programmer.pos);
         }
         return results;
@@ -193,23 +194,25 @@ public class GameManager {
 
     public JPanel getAuthorsPanel() {
 
+
         JFrame f = new JFrame("Créditos");
         JPanel panel = new JPanel();
 
         JLabel jlabel1 = new JLabel("Inês Marques - a22001936");
         JLabel jlabel2 = new JLabel("Robert Cachapa - a22006023");
 
-        panel.setBounds(40,80,200,200);
+        panel.setBounds(40, 80, 200, 200);
         panel.setBackground(Color.white);
 
         panel.add(jlabel1);
         panel.add(jlabel2);
         f.add(panel);
-        f.setSize(300,300);
+        f.setSize(300, 300);
         f.setLayout(null);
         f.setVisible(true);
 
         return panel;
+
     }
 
 }
