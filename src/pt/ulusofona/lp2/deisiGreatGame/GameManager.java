@@ -72,7 +72,7 @@ public class GameManager {
 
         for (String[] strings : playerInfo) {
             languages = strings[2].split(";");
-            for(int b = 0;b< languages.length;b++){
+            for(int b = 0; b < languages.length; b++){
                 languages[b] = languages[b].trim();
             }
             TreeSet<String> tree = new TreeSet<>(Arrays.asList(languages));
@@ -120,8 +120,8 @@ public class GameManager {
 
     public ArrayList<Programmer> getProgrammers() {
         ArrayList<Programmer> programmers = new ArrayList<>();
-        for(int x = 1; x <= board.size(); x++){
-            if(!(board.get(x).isEmpty())){
+        for (int x = 1; x <= board.size(); x++) {
+            if (!(board.get(x).isEmpty())) {
                 programmers.addAll(board.get(x));
             }
         }

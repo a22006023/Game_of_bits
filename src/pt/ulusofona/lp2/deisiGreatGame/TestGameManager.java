@@ -1,6 +1,11 @@
 package pt.ulusofona.lp2.deisiGreatGame;
 
 import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.TreeSet;
+
 import static org.junit.Assert.*;
 
 public class TestGameManager {
@@ -13,10 +18,191 @@ public class TestGameManager {
                 {"31","robroche","Java; C++; Python; Portugues","Blue"},
                 {"16","Alberto","Beck","Brown"}
         };
+        int boardSize = 28;
+        boolean resultado = GameManager.createInitialBoard(playerInfo, boardSize);
+        assertTrue(resultado);
+    }
 
-       // int boardSize = 28;
-       // boolean resultado = GameManager.createInitialBoard(playerInfo, boardSize);
-      //  assertTrue(resultado);
+    @Test
+    public void test02CreateInitialBoard() {
+
+        String[][] playerInfo ={
+                {"28","sranene", "PHP; Java", "Purple"},
+                {"31","robroche","Java; C++; Python; Portugues","Blue"},
+                {"16","Alberto","Beck","Brown"}
+        };
+        int boardSize = 3;
+        boolean resultado = GameManager.createInitialBoard(playerInfo, boardSize);
+        assertFalse(resultado);
+    }
+
+    @Test
+    public void test01getProgrammers() {
+
+        String[][] playerInfo ={
+                {"28","sranene", "PHP; Java", "Purple"},
+                {"31","robroche","Java; C++; Python; Portugues","Blue"},
+                {"16","Alberto","Beck","Brown"}
+        };
+
+        int boardSize = 30;
+        GameManager.createInitialBoard(playerInfo, boardSize);
+
+        String[] languages1 = {"PHP", "Java"};
+        String[] languages2 = {"Java", "C++", "Python", "Portugues"};
+        String[] languages3 = {"Beck"};
+        TreeSet<String> tree1 = new TreeSet<>(Arrays.asList(languages1));
+        TreeSet<String> tree2 = new TreeSet<>(Arrays.asList(languages2));
+        TreeSet<String> tree3 = new TreeSet<>(Arrays.asList(languages3));
+
+
+        Programmer player1 = new Programmer("sranene",28, tree1, ProgrammerColor.PURPLE);
+        Programmer player2 = new Programmer("robroche",31, tree2, ProgrammerColor.BLUE);
+        Programmer player3 = new Programmer("Alberto",16, tree3, ProgrammerColor.BROWN);
+
+        ArrayList<Programmer> programmers = new ArrayList<>();
+        programmers.add(player1);
+        programmers.add(player2);
+        programmers.add(player3);
+
+        assertEquals(programmers, GameManager.getProgrammers());
+
+    }
+
+    @Test
+    public void test01getProgrammersPos() {
+
+        String[][] playerInfo ={
+                {"28","sranene", "PHP; Java", "Purple"},
+                {"31","robroche","Java; C++; Python; Portugues","Blue"},
+                {"16","Alberto","Beck","Brown"}
+        };
+
+        int boardSize = 30;
+        GameManager.createInitialBoard(playerInfo, boardSize);
+
+        String[] languages1 = {"PHP", "Java"};
+        String[] languages2 = {"Java", "C++", "Python", "Portugues"};
+        String[] languages3 = {"Beck"};
+        TreeSet<String> tree1 = new TreeSet<>(Arrays.asList(languages1));
+        TreeSet<String> tree2 = new TreeSet<>(Arrays.asList(languages2));
+        TreeSet<String> tree3 = new TreeSet<>(Arrays.asList(languages3));
+
+
+        Programmer player1 = new Programmer("sranene",28, tree1, ProgrammerColor.PURPLE);
+        Programmer player2 = new Programmer("robroche",31, tree2, ProgrammerColor.BLUE);
+        Programmer player3 = new Programmer("Alberto",16, tree3, ProgrammerColor.BROWN);
+
+        ArrayList<Programmer> programmers = new ArrayList<>();
+        programmers.add(player1);
+        programmers.add(player2);
+        programmers.add(player3);
+
+        assertEquals(programmers, GameManager.getProgrammers(1));
+
+    }
+
+
+    @Test
+    public void test01moveCurrentPlayer() {
+
+        String[][] playerInfo ={
+                {"28","sranene", "PHP; Java", "Purple"},
+                {"31","robroche","Java; C++; Python; Portugues","Blue"},
+                {"16","Alberto","Beck","Brown"}
+        };
+        int boardSize = 30;
+        GameManager.createInitialBoard(playerInfo, boardSize);
+
+        assertFalse(GameManager.moveCurrentPlayer(7));
+
+    }
+
+    @Test
+    public void test02moveCurrentPlayer() {
+
+        String[][] playerInfo ={
+                {"28","sranene", "PHP; Java", "Purple"},
+                {"31","robroche","Java; C++; Python; Portugues","Blue"},
+                {"16","Alberto","Beck","Brown"}
+        };
+        int boardSize = 30;
+        GameManager.createInitialBoard(playerInfo, boardSize);
+
+        assertTrue(GameManager.moveCurrentPlayer(1));
+
+    }
+
+    @Test
+    public void test03moveCurrentPlayer() {
+
+        String[][] playerInfo ={
+                {"28","sranene", "PHP; Java", "Purple"},
+                {"31","robroche","Java; C++; Python; Portugues","Blue"},
+                {"16","Alberto","Beck","Brown"}
+        };
+        int boardSize = 30;
+        GameManager.createInitialBoard(playerInfo, boardSize);
+        GameManager.moveCurrentPlayer(5);
+
+        String[] languages = {"Beck"};
+        TreeSet<String> tree = new TreeSet<>(Arrays.asList(languages));
+        Programmer player = new Programmer("Alberto",16, tree, ProgrammerColor.BROWN);
+
+        ArrayList<Programmer> players = new ArrayList<>();
+        players.add(player);
+
+        assertEquals(players, GameManager.board.get(6));
+
+    }
+
+    @Test
+    public void test04moveCurrentPlayer() {
+
+        String[][] playerInfo ={
+                {"28","sranene", "PHP; Java", "Purple"},
+                {"31","robroche","Java; C++; Python; Portugues","Blue"},
+                {"16","Alberto","Beck","Brown"}
+        };
+        int boardSize = 30;
+        GameManager.createInitialBoard(playerInfo, boardSize);
+        GameManager.moveCurrentPlayer(5);
+
+        String[] languages1 = {"Beck"};
+        TreeSet<String> tree1 = new TreeSet<>(Arrays.asList(languages1));
+        Programmer player1 = new Programmer("Alberto",16, tree1, ProgrammerColor.BROWN);
+
+        ArrayList<Programmer> players1 = new ArrayList<>();
+        players1.add(player1);
+
+        assertEquals(players1, GameManager.board.get(6));
+
+        String[] languages2 = {"PHP", "Java"};
+        TreeSet<String> tree2 = new TreeSet<>(Arrays.asList(languages2));
+        Programmer player2 = new Programmer("sranene",28, tree2, ProgrammerColor.PURPLE);
+
+        ArrayList<Programmer> players2 = new ArrayList<>();
+        players2.add(player2);
+
+        assertEquals(players2, GameManager.board.get(3));
+
+    }
+
+    @Test
+    public void test01getImagePng() {
+
+        String[][] playerInfo ={
+                {"28","sranene", "PHP; Java", "Purple"},
+                {"31","robroche","Java; C++; Python; Portugues","Blue"},
+                {"16","Alberto","Beck","Brown"}
+        };
+        int boardSize = 30;
+        GameManager.createInitialBoard(playerInfo, boardSize);
+
+        assertFalse(GameManager.getImagePng(24).equals("playerPurple.png"));
+        assertTrue(GameManager.getImagePng(30).equals("glory.png"));
+        assertEquals(GameManager.getImagePng(9).equals("blank.png"));
+
     }
 
 
