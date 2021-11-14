@@ -140,54 +140,6 @@ public class TestGameManager {
     }
 
     @Test
-    public void test03moveCurrentPlayer() {
-
-        String[][] playerInfo ={
-                {"28","sranene", "PHP; Java", "Purple"},
-                {"31","robroche","Java; C++; Python; Portugues","Blue"},
-                {"16","Alberto","Beck","Brown"}
-        };
-        int boardSize = 30;
-        GameManager.createInitialBoard(playerInfo, boardSize);
-
-        String[] languages = {"Beck"};
-        TreeSet<String> tree = new TreeSet<>(Arrays.asList(languages));
-        Programmer player = new Programmer("Alberto",16, tree, ProgrammerColor.BROWN);
-
-        GameManager.moveCurrentPlayer(2);
-
-        assertEquals(3, player.getPos());
-
-    }
-
-    @Test
-    public void test04moveCurrentPlayer() {
-
-        String[][] playerInfo ={
-                {"28","sranene", "PHP; Java", "Purple"},
-                {"31","robroche","Java; C++; Python; Portugues","Blue"},
-                {"16","Alberto","Beck","Brown"}
-        };
-        int boardSize = 30;
-        GameManager.createInitialBoard(playerInfo, boardSize);
-        GameManager.moveCurrentPlayer(5);
-
-        String[] languages1 = {"Beck"};
-        TreeSet<String> tree1 = new TreeSet<>(Arrays.asList(languages1));
-        Programmer player1 = new Programmer("Alberto",16, tree1, ProgrammerColor.BROWN);
-
-        assertEquals(6, player1.getPos());
-
-        String[] languages2 = {"PHP", "Java"};
-        TreeSet<String> tree2 = new TreeSet<>(Arrays.asList(languages2));
-        Programmer player2 = new Programmer("sranene",28, tree2, ProgrammerColor.PURPLE);
-        GameManager.moveCurrentPlayer(3);
-
-        assertEquals(4, player2.getPos());
-
-    }
-
-    @Test
     public void test01getImagePng() {
 
         String[][] playerInfo ={
