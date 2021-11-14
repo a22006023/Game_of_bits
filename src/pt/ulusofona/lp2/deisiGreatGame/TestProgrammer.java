@@ -17,12 +17,22 @@ public class TestProgrammer {
 
         assertEquals(programmer.getId(), 3);
         assertEquals(programmer.getName(), "sranene");
+
+    }
+
+    @Test
+    public void test02CreateInitialBoard() {
+
+        TreeSet<String> languages = new TreeSet<>();
+        languages.add("Java");
+        languages.add("PHP");
+        ProgrammerColor color = ProgrammerColor.PURPLE;
+        Programmer programmer = new Programmer("sranene",3,languages , color);
+
         assertEquals(programmer.getColor(), ProgrammerColor.PURPLE);
         assertEquals(programmer.getPos(), 1);
 
     }
-
-
 
 
 
