@@ -7,22 +7,26 @@ import javax.swing.*;
 
 
 public class GameManager {
-     Programmer currentPlayer;
-     ProgrammerColor color;
-     static TreeMap<Integer, ArrayList<Programmer>> board = new TreeMap<>();
+    Programmer currentPlayer;
+    ProgrammerColor color;
+    ArrayList<Programmer> programmers = new ArrayList<>();
+    static TreeMap<Integer, ArrayList<Programmer>> boardProgrammers = new TreeMap<>();
+    TreeMap<Integer, Perk> boardPerksMap = new TreeMap<>();
+    TreeSet<Tool> boardTools;
+    TreeSet<Abyss> boardAbyss;
+
+    Node head = null;
+
+    Node tail = null;
+
+    int nrTurnos = 1;
 
     public GameManager() {
     }
 
-     Node head = null;
-
-     Node tail = null;
-
-    int nrTurnos = 1;
-
     public boolean createInitialBoard(String[][] playerInfo, int boardSize) {
         String[] languages;
-        board.clear();
+        boardProgrammers.clear();
         currentPlayer = null;
         if (head != null) {
             if (head.next.next != null && head.next.next != tail) {
@@ -84,7 +88,7 @@ public class GameManager {
                 case "Brown" -> color = ProgrammerColor.BROWN;
                 case "Purple" -> color = ProgrammerColor.PURPLE;
             }
-
+            programmers.add(new Programmer(strings[1], Integer.parseInt(strings[0]), tree, color));
             players.add(new Programmer(strings[1], Integer.parseInt(strings[0]), tree, color));
         }
         players.sort(Comparator.comparing(Programmer::getId));
@@ -99,9 +103,9 @@ public class GameManager {
             tail = newNode;
         }
         tail.next = head;
-        board.put(1, players);
+        boardProgrammers.put(1, players);
         for (int x = 2; x <= boardSize; x++) {
-            board.put(x, new ArrayList<>());
+            boardProgrammers.put(x, new ArrayList<>());
         }
         return true;
     }
@@ -139,39 +143,103 @@ public class GameManager {
     }
 
     public String getImagePng(int position) {
-        if (position < 1 || position > board.size()) {
+        if (position < 1 || position > boardProgrammers.size()) {
             return null;
         }
-        if (position == board.size()) {
+        if (position == boardProgrammers.size()) {
             return "glory.png";
-        } else if (board.get(position) != null && !(board.get(position).isEmpty())) {
-            return "player" + board.get(position).get(0).color.toString() + ".png";
-        } else {
-            return "blank.png";
+        }
+        if(boardPerksMap.containsKey(position)) {
+            if(boardPerksMap.get(position).getTool() != null){
+                switch (boardPerksMap.get(position).getTool().getTitle()){
+                    case "Herança" -> {
+                        return "inheritance.png";
+                    }
+                    case "Programação Funcional" -> {
+                        return "functional.png";
+                    }
+                    case "Testes unitários" -> {
+                        return "unit-tests.png";
+                    }
+                    case "Tratamento de Excepções" -> {
+                        return "catch.png";
+                    }
+                    case "IDE" -> {
+                        return "IDE.png";
+                    }
+                    case "Ajuda Do Professor" -> {
+                        return "ajuda-professor.png";
+                    }
+
+                }
+            }else if(boardPerksMap.get(position).getAbyss() != null){
+                switch(boardPerksMap.get(position).getAbyss().getTitle()){
+                    case "Erro de sintaxe" -> {
+                        return "syntax.png";
+                    }
+                    case "Erro de lógica" -> {
+                        return "logic.png";
+                    }
+                    case "Exception" -> {
+                        return "exception.png";
+                    }
+                    case "File Not Found Exception" -> {
+                        return "file-not-found-exception.png";
+                    }
+                    case "Crash (aka Rebentanço)" -> {
+                        return "crash.png";
+                    }
+                    case "Duplicated Code" -> {
+                        return "duplicated-code.png";
+                    }
+                    case "Efeitos secundários" -> {
+                        return "secondary-effects.png";
+                    }
+                    case "Blue Screen of Death" -> {
+                        return "bsod.png";
+                    }
+                    case "Ciclo infinito" -> {
+                        return "infinite-loop.png";
+                    }
+                    case "Segmentation Fault" -> {
+                        return "core-dumped.png";
+                    }
+                }
+            }
+        }
+        if (boardProgrammers.get(position) != null && !(boardProgrammers.get(position).isEmpty())) {
+            return "player" + boardProgrammers.get(position).get(0).color.toString() + ".png";
         }
         return "";
 
     }
 
-    public  ArrayList<Programmer> getProgrammers() {
-        ArrayList<Programmer> programmers = new ArrayList<>();
-        for (int x = 1; x <= board.size(); x++) {
-            if (!(board.get(x).isEmpty())) {
-                programmers.addAll(board.get(x));
+    public List<Programmer> getProgrammers(boolean includeDefeated) {
+
+        if (includeDefeated) {
+            for (int x = 1; x <= boardProgrammers.size(); x++) {
+                if (!(boardProgrammers.get(x).isEmpty())) {
+                    programmers.addAll(boardProgrammers.get(x));
+                }
             }
+        }else{
+
         }
+
+
         return programmers;
+
     }
 
     public  ArrayList<Programmer> getProgrammers(int position) {
-        if (!(board.containsKey(position))) {
+        if (!(boardProgrammers.containsKey(position))) {
             return null;
         }
-        if (board.get(position) == null) {
+        if (boardProgrammers.get(position) == null) {
             return null;
         }
 
-        return board.get(position);
+        return boardProgrammers.get(position);
     }
 
     public ArrayList<Programmer> getProgrammers(){
@@ -188,7 +256,7 @@ public class GameManager {
         }
         currentPlayer = head.programmer;
 
-        board.get(currentPlayer.getPos()).remove(currentPlayer);
+        boardProgrammers.get(currentPlayer.getPos()).remove(currentPlayer);
 
         currentPlayer.movePlayer(nrPositions);
 
@@ -203,7 +271,7 @@ public class GameManager {
             }
         }
 
-        board.get(currentPlayer.getPos()).add(currentPlayer);
+        boardProgrammers.get(currentPlayer.getPos()).add(currentPlayer);
 
         nrTurnos += 1;
 
@@ -215,7 +283,7 @@ public class GameManager {
     }
 
     public boolean gameIsOver() {
-        return !(board.get(board.size()).isEmpty());
+        return !(boardProgrammers.get(boardProgrammers.size()).isEmpty());
     }
 
     public ArrayList<String> getGameResults() {
@@ -257,5 +325,55 @@ public class GameManager {
         return panel;
 
     }
+
+    public String getTitle(int position) {
+
+        if (position < 0 || position > boardProgrammers.size()) {
+            return null;
+        }
+        if (boardPerksMap.containsKey(position)) {
+            if (boardPerksMap.get(position).toolOrAbyss() == 1) {
+                return boardPerksMap.get(position).getTool().getTitle();
+            } else if (boardPerksMap.get(position).toolOrAbyss() == 0) {
+                return boardPerksMap.get(position).getAbyss().getTitle();
+            }
+        }
+        return null;
+
+    }
+
+    public String getProgrammersInfo() {
+        StringBuilder res = new StringBuilder();
+        int programmersSize = programmers.size();
+        for (Programmer programmer : programmers) {
+            int i = 0;
+            if (programmer.getTools() != null) {
+                int j = 0;
+                int toolsSize = programmer.getTools().size();
+                res.append(programmer.getName()).append(" : ");
+                for (Tool tool : programmer.getTools()) {
+                    if (toolsSize - 1  == j) {
+                        res.append(tool);
+                        break;
+                    }
+                    res.append(tool).append(";");
+                    j++;
+                }
+            } else {
+                res.append(programmer.getName()).append(" : No tools");
+            }
+            i++;
+            if (programmersSize - 1 == i) {
+                return res.toString();
+            }
+            res.append(" | ");
+        }
+        return "";
+    }
+
+    public String reactToAbyssOrTool() {return "";}
+
+
+
 
 }

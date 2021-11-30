@@ -5,7 +5,9 @@ import java.util.*;
 public class Programmer {
     String name;
     int id;
+    boolean defeated;
     TreeSet<String> languages;
+    TreeSet<Tool> tools;
     ProgrammerColor color;
     int pos = 1;
 
@@ -14,10 +16,19 @@ public class Programmer {
         this.languages = languages;
         this.id = id;
         this.color = color;
+        this.defeated = false;
     }
 
     public int getId() {
         return id;
+    }
+
+    public void gotDefeated() {
+        this.defeated = true;
+    }
+
+    public void addTool(Tool tool) {
+        this.tools.add(tool);
     }
 
     public String getName() {
@@ -30,6 +41,10 @@ public class Programmer {
 
     public int getPos(){
         return pos;
+    }
+
+    public TreeSet<Tool> getTools() {
+        return tools;
     }
 
     public void movePlayer(int nrCasas){
