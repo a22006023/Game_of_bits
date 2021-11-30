@@ -274,8 +274,6 @@ public class GameManager {
             }else if(boardPerksMap.get(currentPlayer.getPos()).getTool() != null){
                 Tool tool = boardPerksMap.get(currentPlayer.getPos()).getTool();
                 currentPlayer.addTool(tool);
-
-
             }
         }
 
