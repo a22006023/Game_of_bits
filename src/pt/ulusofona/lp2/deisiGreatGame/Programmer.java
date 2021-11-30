@@ -7,7 +7,7 @@ public class Programmer {
     int id;
     boolean defeated;
     TreeSet<String> languages;
-    TreeSet<Tool> tools;
+    List<Tool> tools = new ArrayList<>();
     ProgrammerColor color;
     int pos = 1;
 
@@ -21,6 +21,10 @@ public class Programmer {
 
     public int getId() {
         return id;
+    }
+
+    public boolean isDefeated(){
+        return defeated;
     }
 
     public void gotDefeated() {
@@ -43,7 +47,7 @@ public class Programmer {
         return pos;
     }
 
-    public TreeSet<Tool> getTools() {
+    public List<Tool> getTools() {
         return tools;
     }
 
