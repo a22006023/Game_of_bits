@@ -289,7 +289,7 @@ public class GameManager {
         head = head.next;
         tail = tail.next;
 
-        return "";}
+        return null;}
 
     public boolean gameIsOver() {
         return !(boardProgrammers.get(boardProgrammers.size()).isEmpty());
