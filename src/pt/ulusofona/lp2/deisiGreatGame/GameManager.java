@@ -260,13 +260,10 @@ public class GameManager {
 
         boardProgrammers.get(currentPlayer.getPos()).add(currentPlayer);
 
-        String res = reactToAbyssOrTool();
-
         return true;
     }
 
     public String reactToAbyssOrTool() {
-
         if(boardPerksMap.containsKey(currentPlayer.getPos())){
             if(boardPerksMap.get(currentPlayer.getPos()).getAbyss() != null){
                 Abyss abyss = boardPerksMap.get(currentPlayer.getPos()).getAbyss();
@@ -276,7 +273,6 @@ public class GameManager {
                 currentPlayer.addTool(tool);
             }
         }
-
         nrTurnos += 1;
         head = head.next;
         tail = tail.next;
