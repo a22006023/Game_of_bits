@@ -1,9 +1,6 @@
 package pt.ulusofona.lp2.deisiGreatGame;
 
-public class Tool {
-    int id;
-    String title;
-    int pos;
+public class Tool extends Square{
 
     Tool(int id, int pos){
         this.id = id;

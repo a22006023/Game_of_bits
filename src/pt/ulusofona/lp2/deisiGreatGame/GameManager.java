@@ -10,7 +10,7 @@ public class GameManager {
     ProgrammerColor color;
     List<Programmer> programmers = new ArrayList<>();
     TreeMap<Integer, ArrayList<Programmer>> boardProgrammers = new TreeMap<>();
-    TreeMap<Integer, Perk> boardPerksMap = new TreeMap<>();
+    TreeMap<Integer, Square> boardMap = new TreeMap<>();
     List<Tool> boardTools = new ArrayList<>();
     List<Abyss> boardAbyss = new ArrayList<>();
     int dado = 0;
@@ -21,9 +21,72 @@ public class GameManager {
 
     int nrTurnos = 1;
 
-    public GameManager() {
-    }
+    public GameManager() {}
 
+    public Abyss checkAbyss(int id, int pos) {
+        switch (id) {
+            case 0 -> {
+                return new Syntax(id, pos);
+            }
+            case 1 -> {
+                return new Logic(id, pos);
+            }
+            case 2 -> {
+                return new Exception(id, pos);
+            }
+            case 3 -> {
+                return new FileNotFound(id, pos);
+            }
+            case 4 -> {
+                return new Crash(id, pos);
+            }
+            case 5 -> {
+                return new DuplicatedCode(id, pos);
+            }
+            case 6 -> {
+                return new Effects(id, pos);
+            }
+            case 7 -> {
+                return new BlueScreen(id, pos);
+            }
+            case 8 -> {
+                return new Loop(id, pos);
+            }
+            case 9 -> {
+                return new SegmentationFault(id, pos);
+            }
+            default -> {
+                return null;
+
+            }
+        }
+    }
+    public Tool checkTool(int id, int pos) {
+        switch (id) {
+            case 0 -> {
+                return new Inheritance(id, pos);
+            }
+            case 1 -> {
+                return new Functional(id, pos);
+            }
+            case 2 -> {
+                return new UnitTests(id, pos);
+            }
+            case 3 -> {
+                return new Catch(id, pos);
+            }
+            case 4 -> {
+                return new Ide(id, pos);
+            }
+            case 5 -> {
+                return new TeachersHelp(id, pos);
+            }
+            default -> {
+                return null;
+
+            }
+        }
+    }
 
     public boolean createInitialBoard(String[][] playerInfo, int boardSize) {
         String[] languages;
@@ -124,15 +187,15 @@ public class GameManager {
 
                 if (abyssesAndTool[0].equals("0")) {
                     if (checkID >= 0 && checkID <= 9 && checkPos >= 0 && checkPos <= boardSize) {
-                        boardPerksMap.put(checkPos, new Perk(new Abyss(checkID, checkPos)));
-                        boardAbyss.add(new Abyss(checkID,checkPos));
+                        boardMap.put(checkPos, checkAbyss(checkID, checkPos));
+                        boardAbyss.add(checkAbyss(checkID,checkPos));
                     } else {
                         return false;
                     }
                 } else if (abyssesAndTool[0].equals("1")) {
                     if (checkID >= 0 && checkID <= 5 && checkPos >= 0 && checkPos <= boardSize) {
-                        boardPerksMap.put(checkPos, new Perk(new Tool(checkID, checkPos)));
-                        boardTools.add(new Tool(checkID,checkPos));
+                        boardMap.put(checkPos, checkTool(checkID, checkPos));
+                        boardTools.add(checkTool(checkID,checkPos));
                     } else {
                         return false;
                     }
@@ -152,9 +215,9 @@ public class GameManager {
         if (position == boardProgrammers.size()) {
             return "glory.png";
         }
-        if(boardPerksMap.containsKey(position)) {
-            if(boardPerksMap.get(position).getTool() != null){
-                switch (boardPerksMap.get(position).getTool().getTitle()){
+        if(boardMap.containsKey(position)) {
+
+                switch (boardMap.get(position).getTitle()) {
                     case "Herança" -> {
                         return "inheritance.png";
                     }
@@ -173,10 +236,6 @@ public class GameManager {
                     case "Ajuda Do Professor" -> {
                         return "ajuda-professor.png";
                     }
-
-                }
-            } else if (boardPerksMap.get(position).getAbyss() != null){
-                switch(boardPerksMap.get(position).getAbyss().getTitle()){
                     case "Erro de sintaxe" -> {
                         return "syntax.png";
                     }
@@ -208,8 +267,8 @@ public class GameManager {
                         return "core-dumped.png";
                     }
                 }
+
             }
-        }
 
         return null;
 
@@ -285,14 +344,12 @@ public class GameManager {
                 Tool tool = boardPerksMap.get(currentPlayer.getPos()).getTool();
                 currentPlayer.addTool(tool);
             }
-        }
+        }*/
         nrTurnos += 1;
         head = head.next;
         tail = tail.next;
 
-        return null;
-
-    }
+        return null;}
 
     public boolean gameIsOver() {
         return !(boardProgrammers.get(boardProgrammers.size()).isEmpty());
@@ -343,12 +400,8 @@ public class GameManager {
         if (position < 0 || position > boardProgrammers.size()) {
             return null;
         }
-        if (boardPerksMap.containsKey(position)) {
-            if (boardPerksMap.get(position).toolOrAbyss() == 1) {
-                return boardPerksMap.get(position).getTool().getTitle();
-            } else if (boardPerksMap.get(position).toolOrAbyss() == 0) {
-                return boardPerksMap.get(position).getAbyss().getTitle();
-            }
+        if (boardMap.containsKey(position)) {
+            return boardMap.get(position).getTitle();
         }
         return null;
 

@@ -12,14 +12,6 @@ public class Perk {
         this.tool = tool;
     }
 
-    public Abyss getAbyss() {
-        return abyss;
-    }
-
-    public Tool getTool() {
-        return tool;
-    }
-
     public int toolOrAbyss(){
         if (tool == null && abyss == null){
             return -1;
