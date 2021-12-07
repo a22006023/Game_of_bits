@@ -1,5 +1,7 @@
 package pt.ulusofona.lp2.deisiGreatGame;
 
+import java.util.TreeMap;
+
 public class Empty extends Square {
 
     public Empty(int pos) {
@@ -7,6 +9,8 @@ public class Empty extends Square {
     }
 
     @Override
-    public void react(Programmer programmer, int dado) {}
+    public String react(Programmer programmer, int dado, TreeMap<Integer,Square> boardMap) {
+        return null;
+    }
 
 }

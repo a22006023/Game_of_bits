@@ -1,5 +1,7 @@
 package pt.ulusofona.lp2.deisiGreatGame;
 
+import java.util.TreeMap;
+
 public class Crash extends Abyss{
 
     public Crash(int id, int pos) {
@@ -7,9 +9,9 @@ public class Crash extends Abyss{
     }
 
     @Override
-    public void react(Programmer programmer,int dado) {
-        int pos = programmer.getPos();
-        pos -=1;
-        programmer.movePlayer(-pos,200);
+    public String react(Programmer programmer, int dado, TreeMap<Integer,Square> boardMap) {
+        programmer.setPos(1);
+        movePlayerAbyss(boardMap,programmer);
+        return "Crash";
     }
 }

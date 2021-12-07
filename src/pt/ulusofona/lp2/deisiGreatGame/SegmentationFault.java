@@ -1,5 +1,7 @@
 package pt.ulusofona.lp2.deisiGreatGame;
 
+import java.util.TreeMap;
+
 public class SegmentationFault extends Abyss{
 
     public SegmentationFault(int id, int pos) {
@@ -7,7 +9,7 @@ public class SegmentationFault extends Abyss{
     }
 
     @Override
-    public void react(Programmer programmer,int dado) {
-
+    public String react(Programmer programmer, int dado, TreeMap<Integer,Square> boardMap) {
+        return "SegmentationFault";
     }
 }

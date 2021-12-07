@@ -346,6 +346,8 @@ public class GameManager {
     }
 
     public String reactToAbyssOrTool() {
+
+        String res = "";
         if(boardMap.containsKey(currentPlayer.getPos())){
             int oldPosition = currentPlayer.getPos();
             boardMap.get(currentPlayer.getPos()).react(currentPlayer, dado);
@@ -356,7 +358,8 @@ public class GameManager {
         head = head.next;
         tail = tail.next;
 
-        return null;}
+        return res;
+    }
 
     public boolean gameIsOver() {
         return !(boardMap.get(boardMap.size()).getProgrammers().isEmpty());

@@ -1,5 +1,7 @@
 package pt.ulusofona.lp2.deisiGreatGame;
 
+import java.util.TreeMap;
+
 public class Syntax extends Abyss{
 
     public Syntax(int id, int pos) {
@@ -7,7 +9,9 @@ public class Syntax extends Abyss{
     }
 
     @Override
-    public void react(Programmer programmer,int dado) {
+    public String react(Programmer programmer, int dado, TreeMap<Integer,Square> boardMap) {
         programmer.movePlayer(-1,200);
+        movePlayerAbyss(boardMap,programmer);
+        return "Syntax";
     }
 }
