@@ -82,8 +82,9 @@ public class TestGameManager {
                 {"16","Alberto","Beck","Brown"}
         };
 
+        String[][] teste ={};
         int boardSize = 30;
-        gameManager.createInitialBoard(playerInfo, boardSize);
+        gameManager.createInitialBoard(playerInfo, boardSize, teste);
 
         String[] languages1 = {"PHP", "Java"};
         String[] languages2 = {"Java", "C++", "Python", "Portugues"};

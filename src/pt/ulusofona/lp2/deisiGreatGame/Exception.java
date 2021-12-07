@@ -10,9 +10,19 @@ public class Exception extends Abyss{
 
     @Override
     public String react(Programmer programmer, int dado, TreeMap<Integer,Square> boardMap) {
-        programmer.movePlayer(-2,200);
-        movePlayerAbyss(boardMap,programmer);
-        return "Exception";
+        if (!Catch.class.isAssignableFrom(programmer.getTools().getClass()) &&
+                !TeachersHelp.class.isAssignableFrom(programmer.getTools().getClass()) ) {
+            programmer.movePlayer(-2,200);
+            movePlayerAbyss(boardMap,programmer);
+            return "Exception";
+        }
+        for (Tool tool : programmer.getTools()) {
+            if (tool.getTitle().equals("Programação Funcional") || tool.getTitle().equals("Ajuda Do Professor")) {
+                programmer.removeTool(tool);
+            }
+        }
+        return "safaste-te";
+
     }
 }
 

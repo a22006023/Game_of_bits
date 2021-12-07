@@ -44,7 +44,7 @@ public class GameManager {
                 return new DuplicatedCode(id, pos);
             }
             case 6 -> {
-                return new Effects(id, pos);
+                return new SideEffects(id, pos);
             }
             case 7 -> {
                 return new BlueScreen(id, pos);
@@ -318,9 +318,14 @@ public class GameManager {
             return false;
         }
 
+
         dado = nrPositions;
 
         currentPlayer = head.programmer;
+
+        if(currentPlayer.getLoop()){
+            return false;
+        }
 
         //boardProgrammers.get(currentPlayer.getPos()).remove(currentPlayer);
 

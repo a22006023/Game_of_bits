@@ -131,5 +131,9 @@ public class Programmer {
     }
 
 
-
+    public void removeTool(Tool tool) {
+        if(tools.contains(tool)) {
+            this.tools.remove(tool);
+        }
+    }
 }

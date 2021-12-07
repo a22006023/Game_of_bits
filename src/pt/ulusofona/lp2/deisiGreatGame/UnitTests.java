@@ -12,7 +12,6 @@ public class UnitTests extends Tool{
     public String react(Programmer programmer, int dado, TreeMap<Integer,Square> boardMap) {
         if (!programmer.getTools().contains(this)){
             programmer.addTool(this);
-
         }
         return "UnitTests";
     }
