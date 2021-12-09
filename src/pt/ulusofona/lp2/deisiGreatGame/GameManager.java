@@ -420,7 +420,7 @@ public class GameManager {
         for (Programmer programmer : programmers) {
             if (!programmer.getTools().isEmpty()) {
                 int j = 0;
-                int toolsSize = programmer.getTools().size();
+                int toolsSize = programmer.getTools().size() - 1; // meti aqui um -1 vms ver se da agr
                 res.append(programmer.getName()).append(" : ");
                 if (programmer.getTools().size() == 1) {
                     res.append(programmer.getTools().get(0).getTitle());
