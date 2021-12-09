@@ -18,7 +18,7 @@ public class SegmentationFault extends Abyss{
                 return "safaste-te";
             }
         }
-        if (boardMap.get(this.pos).getProgrammers().size() == 2) {
+        if (boardMap.get(this.pos).getProgrammers().size() > 1) {
             for(Programmer programmer1 : getProgrammers()) {
                 programmer1.movePlayer(-3, 200);
                 movePlayerAbyss(boardMap, programmer1);
