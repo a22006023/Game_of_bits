@@ -357,7 +357,11 @@ public class GameManager {
                 countGameOver++;
             }
         }
-        return countGameOver == programmers.size() - 1 || !boardMap.get(boardMap.size()).getProgrammers().isEmpty();
+        if (boardMap.get(boardMap.size()) != null) {
+            return countGameOver == programmers.size() - 1 || !boardMap.get(boardMap.size()).getProgrammers().isEmpty();
+        }
+
+        return false;
     }
 
     public List<String> getGameResults() {

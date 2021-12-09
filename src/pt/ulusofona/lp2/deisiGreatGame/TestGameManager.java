@@ -162,7 +162,7 @@ public class TestGameManager {
 
  }
 
-    /*@Test
+    @Test
     public void test01getProgrammersInfo() {
         GameManager gameManager =  new GameManager();
         String[][] playerInfo ={
@@ -179,7 +179,7 @@ public class TestGameManager {
         gameManager.currentPlayer.addTool(functional);
 
         assertEquals("Alberto : Programação Funcional | sranene : No tools | robroche : No tools", gameManager.getProgrammersInfo());
-    }*/
+    }
 
  /*testar se dar move current player muda para o outro*/
 
