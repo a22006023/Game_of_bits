@@ -13,7 +13,7 @@ public class SegmentationFault extends Abyss{
         // verificar se existem dois jogadores nesta casa
 
         for (Tool tool : programmer.getTools()) {
-            if (tool.getTitle().equals("Tratamento de Excepções") && boardMap.get(programmer.getPos()).getProgrammers().size() == 2) {
+            if (tool.getTitle().equals("Tratamento de Excepções")) {
                 programmer.removeTool(tool);
                 return "safaste-te";
             }

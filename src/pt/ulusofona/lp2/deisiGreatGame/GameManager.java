@@ -322,7 +322,9 @@ public class GameManager {
         dado = nrPositions;
         currentPlayer = head.programmer;
 
-        boardMap.get(currentPlayer.getPos()).removeProgrammer(currentPlayer);
+        if (boardMap.get(currentPlayer.getPos()) != null) {
+            boardMap.get(currentPlayer.getPos()).removeProgrammer(currentPlayer);
+        }
 
         currentPlayer.movePlayer(nrPositions, boardMap.size());
 
@@ -421,13 +423,17 @@ public class GameManager {
                 int j = 0;
                 int toolsSize = programmer.getTools().size();
                 res.append(programmer.getName()).append(" : ");
-                for (Tool tool : programmer.getTools()) {
-                    if (toolsSize - 1  == j) {
-                        res.append(tool.getTitle());
-                        break;
+                if (programmer.getTools().size() == 1) {
+                    res.append(programmer.getTools().get(0).getTitle());
+                } else {
+                    for (Tool tool : programmer.getTools()) {
+                        if (toolsSize - 1  == j) {
+                            res.append(tool.getTitle());
+                            break;
+                        }
+                        res.append(tool.getTitle()).append(";");
+                        j++;
                     }
-                    res.append(tool.getTitle()).append(";");
-                    j++;
                 }
             } else {
                 res.append(programmer.getName()).append(" : No tools");
