@@ -8,7 +8,6 @@ public class Programmer {
     boolean defeated;
     TreeSet<String> languages;
     List<Tool> tools = new ArrayList<>();
-    TreeSet<String> toolsTitle = new TreeSet<>();
     ProgrammerColor color;
     int pos = 1;
     int posAnterior = 1;
@@ -37,14 +36,6 @@ public class Programmer {
 
     public void addTool(Tool tool) {
         this.tools.add(tool);
-    }
-
-    public void addToolTitle(String tool){
-        this.toolsTitle.add(tool);
-    }
-
-    public TreeSet<String> getToolsTitle(){
-        return toolsTitle;
     }
 
     public String getName() {
@@ -98,15 +89,16 @@ public class Programmer {
 
     public String getStringTools() {
         StringBuilder res = new StringBuilder();
-        if (toolsTitle.isEmpty()) {
+        if (this.tools.isEmpty()) {
             res.append("No tools");
         } else {
-            int i = 0;
-            for(String tool : toolsTitle) {
-                if (i == toolsTitle.size()) {
-                    res.append(tool);
+            int i = 1;
+            for(Tool tool : this.tools) {
+                if (i == this.tools.size()) {
+                    res.append(tool.getTitle());
+                } else {
+                    res.append(tool.getTitle()).append(";");
                 }
-                res.append(tool).append(";");
                 i++;
             }
         }
@@ -132,15 +124,16 @@ public class Programmer {
             languages.append(language).append("; ");
         }
         // tools
-        if (toolsTitle.isEmpty()) {
+        if (this.tools.isEmpty()) {
             tools.append("No tools");
         } else {
-            int i = 0;
-            for(String tool : toolsTitle) {
-                if (i == toolsTitle.size()) {
-                    tools.append(tool);
+            int i = 1;
+            for(Tool tool : this.tools) {
+                if (i == this.tools.size()) {
+                    tools.append(tool.getTitle());
+                } else {
+                    tools.append(tool.getTitle()).append(";");
                 }
-                tools.append(tool).append(";");
                 i++;
             }
         }

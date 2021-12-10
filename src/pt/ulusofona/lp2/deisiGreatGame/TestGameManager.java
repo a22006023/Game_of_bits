@@ -164,7 +164,7 @@ public class TestGameManager {
 
     @Test
     public void test01getProgrammersInfo() {
-        /*GameManager gameManager =  new GameManager();
+        GameManager gameManager =  new GameManager();
         String[][] playerInfo ={
                 {"28","sranene", "PHP; Java", "Purple"},
                 {"31","robroche","Java; C++; Python; Portugues","Blue"},
@@ -178,12 +178,12 @@ public class TestGameManager {
         Functional functional = new Functional(1, 2);
         gameManager.currentPlayer.addTool(functional);
 
-        assertEquals("Alberto : Programação Funcional | sranene : No tools | robroche : No tools", gameManager.getProgrammersInfo());*/
+        assertEquals("Alberto : Programação Funcional | sranene : No tools | robroche : No tools", gameManager.getProgrammersInfo());
     }
 
     @Test
     public void test01getProgrammersInfoCatchesSameTool() {
-        /*GameManager gameManager =  new GameManager();
+        GameManager gameManager =  new GameManager();
         String[][] playerInfo ={
                 {"28","sranene", "PHP; Java", "Purple"},
                 {"31","robroche","Java; C++; Python; Portugues","Blue"},
@@ -195,16 +195,16 @@ public class TestGameManager {
         gameManager.createInitialBoard(playerInfo,30,mostrarAInes);
         gameManager.moveCurrentPlayer(1);
         Functional functional = new Functional(1, 2);
-        gameManager.currentPlayer.addTool(functional);
-        gameManager.currentPlayer.addToolTitle(functional.getTitle());
+        functional.react(gameManager.currentPlayer, 1, gameManager.boardMap);
         gameManager.moveCurrentPlayer(3);
+        functional.react(gameManager.currentPlayer, 3, gameManager.boardMap);
         gameManager.moveCurrentPlayer(3);
+        functional.react(gameManager.currentPlayer, 3, gameManager.boardMap);
         gameManager.moveCurrentPlayer(6);
         Functional functional2 = new Functional(1, 7);
-        gameManager.currentPlayer.addTool(functional2);
-        gameManager.currentPlayer.addToolTitle(functional2.getTitle());
+        functional.react(gameManager.currentPlayer, 6, gameManager.boardMap);
 
-        assertEquals("Alberto : Programação Funcional | sranene : No tools | robroche : No tools", gameManager.getProgrammersInfo());*/
+        assertEquals("Alberto : Programação Funcional | sranene : No tools | robroche : No tools", gameManager.getProgrammersInfo());
 
     }
 
