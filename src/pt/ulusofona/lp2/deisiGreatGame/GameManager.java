@@ -331,7 +331,7 @@ public class GameManager {
 
     }
 
-    public void changeTurn() {
+    public void nextNode() {
         nrTurnos += 1;
         head = head.next;
         tail = tail.next;
@@ -345,8 +345,7 @@ public class GameManager {
         if(boardMap.containsKey(currentPlayer.getPos()) && !currentPlayer.isDefeated()){
             res = boardMap.get(currentPlayer.getPos()).react(currentPlayer, dado, boardMap);
         }
-
-        changeTurn();
+        nextNode();
 
         return res;
     }
