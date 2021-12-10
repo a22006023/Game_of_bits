@@ -323,6 +323,7 @@ public class GameManager {
         currentPlayer = head.programmer;
 
         if (boardMap.get(currentPlayer.getPos()) != null) {
+
             boardMap.get(currentPlayer.getPos()).removeProgrammer(currentPlayer);
             currentPlayer.movePlayer(nrPositions, boardMap.size());
             boardMap.get(currentPlayer.getPos()).addProgrammer(currentPlayer);
@@ -360,7 +361,6 @@ public class GameManager {
         if (boardMap.get(boardMap.size()) != null) {
             return countGameOver == programmers.size() - 1 || !boardMap.get(boardMap.size()).getProgrammers().isEmpty();
         }
-
         return false;
     }
 
@@ -388,7 +388,7 @@ public class GameManager {
     }
 
     public JPanel getAuthorsPanel() {
-        
+
         JPanel panel = new JPanel();
 
         JLabel jlabel1 = new JLabel("Inês Marques - a22001936");
@@ -421,25 +421,9 @@ public class GameManager {
         int programmersSize = programmers.size();
         int i = 0;
         for (Programmer programmer : programmers) {
-            if (!programmer.getTools().isEmpty()) {
-                int j = 0;
-                int toolsSize = programmer.getTools().size();
-                res.append(programmer.getName()).append(" : ");
-                if (programmer.getTools().size() == 1) {
-                    res.append(programmer.getTools().get(0).getTitle());
-                } else {
-                    for (Tool tool : programmer.getTools()) {
-                        if (toolsSize - 1  == j) {
-                            res.append(tool.getTitle());
-                            break;
-                        }
-                        res.append(tool.getTitle()).append(";");
-                        j++;
-                    }
-                }
-            } else {
-                res.append(programmer.getName()).append(" : No tools");
-            }
+            res.append(programmer.getName()).append(" : ");
+            res.append(programmer.getStringTools());
+
             i++;
             if (programmersSize == i) {
                 return res.toString();
@@ -448,60 +432,4 @@ public class GameManager {
         }
         return "";
     }
-
-
-    /*public void getAbyss(Abyss abyss){
-        switch(abyss.getId()){
-            case 0 -> abyssFunction0();
-            case 1 -> abyssFunction1();
-            case 2 -> abyssFunction2();
-            case 3 -> abyssFunction3();
-            case 4 -> abyssFunction4();
-            case 5 -> abyssFunction5();
-            case 6 -> abyssFunction6();
-            case 7 -> abyssFunction7();
-            case 8 -> abyssFunction8();
-            case 9 -> abyssFunction9();
-        }
-    }
-
-
-    public void abyssFunction9() {
-    }
-
-    public void abyssFunction8() {
-    }
-
-    public void abyssFunction7() {
-    }
-
-    public void abyssFunction6() {
-    }
-
-    public void abyssFunction5() {
-    }
-
-    public void abyssFunction4() {
-       int pos = currentPlayer.getPos();
-       pos -= 1;
-       moveCurrentPlayerAbyss(-pos);
-    }
-
-    public void abyssFunction3() {
-        moveCurrentPlayerAbyss(-3);
-    }
-
-    public void abyssFunction2() {
-        moveCurrentPlayerAbyss(-2);
-    }
-
-    public void abyssFunction1() {
-        int arredondado = -(dado/2);
-        moveCurrentPlayerAbyss(arredondado);
-    }
-
-    public void abyssFunction0() {
-       moveCurrentPlayerAbyss(-1);
-    }*/
-
 }

@@ -1,5 +1,6 @@
 package pt.ulusofona.lp2.deisiGreatGame;
 
+import java.util.List;
 import java.util.TreeMap;
 
 public class Catch extends Tool {

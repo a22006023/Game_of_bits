@@ -87,6 +87,23 @@ public class Programmer {
         return this.loop;
     }
 
+    public String getStringTools() {
+        StringBuilder res = new StringBuilder();
+        if (toolsTitle.isEmpty()) {
+            res.append("No tools");
+        } else {
+            int i = 0;
+            for(String tool : toolsTitle) {
+                if (i == toolsTitle.size()) {
+                    res.append(tool);
+                }
+                res.append(tool).append(";");
+                i++;
+            }
+        }
+        return res.toString();
+    }
+
     public void setLoop(boolean looped){
         this.loop = looped;
     }
@@ -106,15 +123,15 @@ public class Programmer {
             languages.append(language).append("; ");
         }
         // tools
-        if (this.tools.isEmpty()) {
+        if (toolsTitle.isEmpty()) {
             tools.append("No tools");
         } else {
             int i = 0;
-            for(Tool tool : this.tools) {
-                if (i == this.tools.size()) {
-                    tools.append(tool.getTitle());
+            for(String tool : toolsTitle) {
+                if (i == toolsTitle.size()) {
+                    tools.append(tool);
                 }
-                tools.append(tool.getTitle()).append(";");
+                tools.append(tool).append(";");
                 i++;
             }
         }
@@ -124,17 +141,6 @@ public class Programmer {
         } else {
             status = "Em Jogo";
         }
-
-        /*
-        Nota: Para programadores que saiam do
-        jogo, <Pos> deve ter a posição onde
-        estavam quando perderam o jogo.
-
-        <Estado> deve ter o valor “Em Jogo”
-        (caso o jogador ainda esteja em jogo)
-        ou “Derrotado” (caso o jogador tenha
-        saído do jogo).
-        */
 
         return id + " | " + name + " | " + pos + " | " + tools + " | " + languages + " | " + status;
     }

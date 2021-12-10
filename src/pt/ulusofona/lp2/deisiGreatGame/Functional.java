@@ -14,7 +14,6 @@ public class Functional extends Tool {
             if (tool.getTitle().equals("Programação Funcional")) {
                 return "Já tens";
             }
-        }
         programmer.addTool(this);
         return "Functional";
 
