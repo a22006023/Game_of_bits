@@ -309,6 +309,9 @@ public class GameManager {
         if (nrPositions < 1 || nrPositions > 6) {
             return false;
         }
+        if (nrPositions > boardMap.size()) {
+            return false;
+        }
         if(head.next.programmer.isDefeated()){
             head.next = head.next.next;
         }
