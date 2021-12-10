@@ -14,7 +14,7 @@ public class SegmentationFault extends Abyss{
 
         if (boardMap.get(pos).getProgrammers().size() > 1) {
             int count = 0;
-            for(Tool tool : boardMap.get(pos).getProgrammers().get(boardMap.get(pos).getProgrammers().size()).getTools()){
+            for(Tool tool : boardMap.get(pos).getProgrammers().get(boardMap.get(pos).getProgrammers().size()-1).getTools()){
                 if(tool.getTitle().equals("Tratamento de Excepções")){
                     count++;
                 }
