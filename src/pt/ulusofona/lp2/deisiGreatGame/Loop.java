@@ -13,22 +13,38 @@ public class Loop extends Abyss{
 
         if (boardMap.get(pos).getProgrammers().size() > 1) {
             int count = 0;
-            for (Tool tool : boardMap.get(pos).getProgrammers().get(boardMap.get(pos).getProgrammers().size() - 1).getTools()) {
-                if (tool.getTitle().equals("Tratamento de Excepções")) {
+            for (int x = 0; x < programmer.getTools().size(); x++) {
+                if (programmer.getTools().get(x).getTitle().equals("Programação Funcional")) {
+                    programmer.removeTool(programmer.getTools().get(x));
                     count++;
-                    programmer.removeTool(tool);
                 }
             }
             if (count == 0) {
                 programmer.setLoop(true);
                 boardMap.get(pos).getProgrammers().get(0).setLoop(false);
-                return "tas preso";
+                return "Loop";
             }
             return "safaste-te";
+
         } else {
-            programmer.setLoop(true);
+            int count = 0;
+            if (programmer.getTools() != null && !programmer.getTools().isEmpty()) {
+                for (int x = 0; x < programmer.getTools().size(); x++) {
+                    if (programmer.getTools().get(x).getTitle().equals("Programação Funcional")) {
+                        programmer.removeTool(programmer.getTools().get(x));
+                        count++;
+                    }
+                }
+            }
+
+            if (count == 0) {
+                programmer.setLoop(true);
+                return "Loop";
+            }
+
+
         }
-        return "Loop";
+        return "safaste te";
     }
 
 }

@@ -311,7 +311,7 @@ public class GameManager {
         }
 
         if (head.programmer.isDefeated()) {
-            head.next = head.next.next;
+            head = head.next;
             return false;
         }
 
@@ -331,6 +331,13 @@ public class GameManager {
 
     }
 
+    public void changeTurn() {
+        nrTurnos += 1;
+        head = head.next;
+        tail = tail.next;
+
+    }
+
     public String reactToAbyssOrTool() {
 
         String res = null;
@@ -339,9 +346,7 @@ public class GameManager {
             res = boardMap.get(currentPlayer.getPos()).react(currentPlayer, dado, boardMap);
         }
 
-        nrTurnos += 1;
-        head = head.next;
-        tail = tail.next;
+        changeTurn();
 
         return res;
     }
@@ -425,12 +430,15 @@ public class GameManager {
         int programmersSize = programmers.size();
         int i = 0;
         for (Programmer programmer : programmers) {
-            res.append(programmer.getName()).append(" : ");
-            res.append(programmer.getStringTools());
+            if (!programmer.isDefeated()) {
 
-            i++;
-            if (programmersSize == i) {
-                return res.toString();
+                res.append(programmer.getName()).append(" : ");
+                res.append(programmer.getStringTools());
+
+                i++;
+                if (programmersSize == i) {
+                    return res.toString();
+                }
             }
             res.append(" | ");
         }

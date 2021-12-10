@@ -10,6 +10,18 @@ import static org.junit.Assert.*;
 
 public class TestGameManager {
 
+    GameManager jogo = new GameManager();
+    String[][] players = {
+            {"1","sla","D;Clojure;Java","Purple"},
+            {"2","sla2","D;Clojure;Common Lisp","Green"},
+            {"3","sla3","D;Clojure;Python","Blue"},
+            {"4","sla4","Python","Brown"}
+    };
+    String[][] abyssOrTool = {
+            {"0","0","10"},
+            {"1","3","11"}
+    };
+
  @Test
  public void test01CreateInitialBoard() {
       GameManager gameManager =  new GameManager();

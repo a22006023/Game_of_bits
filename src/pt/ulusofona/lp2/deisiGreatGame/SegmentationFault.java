@@ -25,6 +25,7 @@ public class SegmentationFault extends Abyss{
                     programmer1.movePlayer(-3,200);
                     movePlayerAbyss(boardMap,programmer1);
                 }
+                return "Segmentation Fault";
             }
 
             return "safaste-te";
