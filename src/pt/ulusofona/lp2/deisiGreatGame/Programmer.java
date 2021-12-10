@@ -73,7 +73,7 @@ public class Programmer {
         int sub;
         pos += nrCasas;
         if(pos < 1){
-            pos -= nrCasas;
+            pos = 1;
         }
         if(pos > size){
             sub = pos-size;

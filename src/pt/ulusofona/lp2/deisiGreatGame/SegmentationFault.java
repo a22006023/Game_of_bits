@@ -13,19 +13,17 @@ public class SegmentationFault extends Abyss{
         // verificar se existem dois jogadores nesta casa
 
         if (boardMap.get(pos).getProgrammers().size() > 1) {
-
-            for(Programmer programmer1 : getProgrammers()) {
-                int count = 0;
-                    for (Tool tool : programmer1.getTools()) {
-                        if (tool.getTitle().equals("Tratamento de Excepções")) {
-                            programmer1.removeTool(tool);
-                            count++;
-                        }
-                    }if (count != 1) {
-                        programmer1.movePlayer(-3,200);
-                        movePlayerAbyss(boardMap, programmer1);
+            int count = 0;
+            for(Tool tool : boardMap.get(pos).getProgrammers().get(boardMap.get(pos).getProgrammers().size()).getTools()){
+                if(tool.getTitle().equals("Tratamento de Excepções")){
+                    count++;
                 }
-                return "safaste-te";
+            }
+            if(count == 0){
+                for (Programmer programmer1 : getProgrammers()){
+                    programmer1.movePlayer(-3,200);
+                    movePlayerAbyss(boardMap,programmer1);
+                }
             }
             return "SegmentationFault";
         }
