@@ -122,13 +122,12 @@ public class GameManager {
                     (playerInfo[x][3].equals(ProgrammerColor.BLUE.toString())))) {
                 return false;
             }
+            if (Integer.parseInt(playerInfo[x][0]) < 0 || playerInfo[x][0] == null) {
+                return false;
+            }
 
             for (int y = x + 1; y < jogadores; y++) {
-                if (Integer.parseInt(playerInfo[x][0]) < 0 || playerInfo[x][0] == null) {
-                    return false;
-                } else if (x == jogadores - 1) {
-                    break;
-                } else if (playerInfo[x][0].equals(playerInfo[y][0])) {
+                if (playerInfo[x][0].equals(playerInfo[y][0])) {
                     return false;
                 } else if (playerInfo[x][3].equals(playerInfo[y][3])) {
                     return false;

@@ -12,27 +12,86 @@ public class TestGameManager {
 
     GameManager game = new GameManager();
 
-    String[][] playerInfo = {
+    String[][] playerInfo2 = {
+            {"28", "sranene", "PHP; Java", "Purple"},
+            {"31", "robroche", "Java; C++; Python; Portugues", "Blue"},
+    };
+    
+    String[][] playerInfo3 = {
             {"28", "sranene", "PHP; Java", "Purple"},
             {"31", "robroche", "Java; C++; Python; Portugues", "Blue"},
             {"16", "Alberto", "Beck", "Brown"}
     };
 
+
     @Test
     public void test01CreateInitialBoard() {
-
         int boardSize = 28;
-        boolean resultado = game.createInitialBoard(playerInfo, boardSize);
+        boolean resultado = game.createInitialBoard(playerInfo3, boardSize);
         assertTrue(resultado);
     }
 
     @Test
     public void test02CreateInitialBoard() {
-
-
         int boardSize = 3;
-        boolean resultado = game.createInitialBoard(playerInfo, boardSize);
+        String[][] teste = {};
+        boolean resultado = game.createInitialBoard(playerInfo3, boardSize);
         assertFalse(resultado);
+        assertFalse(game.createInitialBoard(teste,20));
+    }
+
+    @Test
+    public void test03CreateInitialBoardValidatePlayerInfo(){
+        String[][] teste = {
+                {"", "", "", ""},
+                {"", "", "", ""}
+        };
+        assertFalse(game.createInitialBoard(teste,20));
+        String[][] teste2 = {
+                {"28", "", "", ""},
+                {"", "", "", ""}
+        };
+        assertFalse(game.createInitialBoard(teste2,20));
+        String[][] teste3 = {
+                {"28", "sranene", "", ""},
+                {"", "", "", ""}
+        };
+        assertFalse(game.createInitialBoard(teste3,20));
+        String[][] teste4 = {
+                {"28", "sranene", "PHP; Java", ""},
+                {"", "", "", ""}
+        };
+        assertFalse(game.createInitialBoard(teste4,20));
+        String[][] teste5 = {
+                {"28", "sranene", "PHP; Java", "Green"},
+                {"-2", "robroche", "Java", "Purple"}
+        };
+        assertFalse(game.createInitialBoard(teste5,20));
+        String[][] teste6 = {
+                {"28","sranene","PHP; Java","Green"},
+                {"28","robroche","Python","Purple"}
+        };
+        assertFalse(game.createInitialBoard(teste6,20));
+        String[][] teste7 = {
+                {"28","sranene","PHP; Java","Green"},
+                {"31","robroche","Python","Black"}
+        };
+        assertFalse(game.createInitialBoard(teste7,20));
+        String[][] teste8 = {
+                {"28","sranene","PHP; Java","Green"},
+                {"31","robroche","Python","Brown"},
+                {"16","Alberto","Beck","Green"}
+        };
+        assertFalse(game.createInitialBoard(teste8,20));
+        String[][] teste9 = {
+                {"28","sranene","PHP; Java","Green"},
+                {"31","robroche","Python","Brown"},
+                {"16","Alberto","Beck","Purple"},
+                {"1","Actual :","Spanish(no)","Blue"}
+        };
+        assertTrue(game.createInitialBoard(teste9,20));
+        game.moveCurrentPlayer(4);
+        game.createInitialBoard(teste9,20);
     }
 
 
@@ -41,7 +100,7 @@ public class TestGameManager {
 
 
         int boardSize = 30;
-        game.createInitialBoard(playerInfo, boardSize);
+        game.createInitialBoard(playerInfo3, boardSize);
         String[] languages1 = {"PHP", "Java"};
         String[] languages2 = {"Java", "C++", "Python", "Portugues"};
         String[] languages3 = {"Beck"};
@@ -72,7 +131,7 @@ public class TestGameManager {
 
         String[][] teste = {};
         int boardSize = 30;
-        game.createInitialBoard(playerInfo, boardSize, teste);
+        game.createInitialBoard(playerInfo3, boardSize, teste);
 
         String[] languages1 = {"PHP", "Java"};
         String[] languages2 = {"Java", "C++", "Python", "Portugues"};
@@ -103,7 +162,7 @@ public class TestGameManager {
     public void test01moveCurrentPlayer() {
 
         int boardSize = 30;
-        game.createInitialBoard(playerInfo, boardSize);
+        game.createInitialBoard(playerInfo3, boardSize);
         assertFalse(game.moveCurrentPlayer(7));
 
     }
@@ -113,7 +172,7 @@ public class TestGameManager {
 
         String[][] mostrarAInes = {};
         int boardSize = 30;
-        game.createInitialBoard(playerInfo, boardSize, mostrarAInes);
+        game.createInitialBoard(playerInfo3, boardSize, mostrarAInes);
 
         assertTrue(game.moveCurrentPlayer(1));
         assertFalse(game.getProgrammers(2).isEmpty());
@@ -126,7 +185,7 @@ public class TestGameManager {
 
 
         String[][] mostrarAInes = {};
-        game.createInitialBoard(playerInfo, 30, mostrarAInes);
+        game.createInitialBoard(playerInfo3, 30, mostrarAInes);
 
         assertNotEquals("playerPurple.png", game.getImagePng(24));
         assertEquals("glory.png", game.getImagePng(30));
@@ -139,7 +198,7 @@ public class TestGameManager {
 
 
         String[][] mostrarAInes = {};
-        game.createInitialBoard(playerInfo, 30, mostrarAInes);
+        game.createInitialBoard(playerInfo3, 30, mostrarAInes);
         game.moveCurrentPlayer(1);
         Functional functional = new Functional(1, 2);
         game.currentPlayer.addTool(functional);
@@ -152,7 +211,7 @@ public class TestGameManager {
 
 
         String[][] mostrarAInes = {};
-        game.createInitialBoard(playerInfo, 30, mostrarAInes);
+        game.createInitialBoard(playerInfo3, 30, mostrarAInes);
         game.moveCurrentPlayer(1);
         Functional functional = new Functional(1, 2);
         functional.react(game.currentPlayer, 1, game.boardMap);
@@ -173,7 +232,7 @@ public class TestGameManager {
             { "0", "7", "8" }
         };
 
-        assertTrue(game.createInitialBoard(playerInfo, 30, abyss));
+        assertTrue(game.createInitialBoard(playerInfo3, 30, abyss));
         game.moveCurrentPlayer(6);//Alberto vai po 7
         game.reactToAbyssOrTool();
         game.moveCurrentPlayer(4);//sranene vai po 5
@@ -203,7 +262,7 @@ public class TestGameManager {
                 { "0", "7", "8" }
         };
         ArrayList<String> results = new ArrayList<>();
-        assertTrue(game.createInitialBoard(playerInfo, 30, abyss));
+        assertTrue(game.createInitialBoard(playerInfo3, 30, abyss));
         game.moveCurrentPlayer(6);//Alberto vai po 7
         game.reactToAbyssOrTool();
         assertFalse(game.gameIsOver());
@@ -239,7 +298,7 @@ public class TestGameManager {
         String[][] abyss ={
                 { "0", "7", "8" }
         };
-        assertTrue(game.createInitialBoard(playerInfo, 30, abyss));
+        assertTrue(game.createInitialBoard(playerInfo3, 30, abyss));
         game.moveCurrentPlayer(6);//Alberto vai po 7
         game.reactToAbyssOrTool();
         game.moveCurrentPlayer(4);//sranene vai po 5
