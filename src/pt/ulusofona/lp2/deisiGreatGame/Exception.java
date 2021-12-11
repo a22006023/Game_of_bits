@@ -25,4 +25,3 @@ public class Exception extends Abyss{
 
     }
 }
-

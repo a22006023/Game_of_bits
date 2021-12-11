@@ -14,17 +14,19 @@ public class SegmentationFault extends Abyss{
 
         if (boardMap.get(pos).getProgrammers().size() > 1) {
             int count = 0;
-            for(Tool tool : boardMap.get(pos).getProgrammers().get(boardMap.get(pos).getProgrammers().size()-1).getTools()){
+            for(Tool tool : programmer.getTools()){
                 if(tool.getTitle().equals("Tratamento de Excepções")){
                     count++;
                     programmer.removeTool(tool);
                 }
             }
             if(count == 0){
-                for (Programmer programmer1 : getProgrammers()){
+                for (Programmer programmer1 : programmers){
                     programmer1.movePlayer(-3,200);
                     movePlayerAbyss(boardMap,programmer1);
                 }
+                programmer.movePlayer(-3,200);
+                movePlayerAbyss(boardMap,programmer);
                 return "Segmentation Fault";
             }
 

@@ -6,7 +6,7 @@ public class BlueScreen extends Abyss{
 
     public BlueScreen(int id, int pos) {
         super(id, pos);
-}
+    }
 
     @Override
     public String react(Programmer programmer, int dado, TreeMap<Integer,Square> boardMap) {
