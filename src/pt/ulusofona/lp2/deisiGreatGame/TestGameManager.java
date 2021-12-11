@@ -223,7 +223,7 @@ public class TestGameManager {
         results.add("O GRANDE JOGO DO DEISI");
         results.add("");
         results.add("NR. DE TURNOS");
-        results.add("" + 4);
+        results.add("" + 6);
         results.add("");
         results.add("VENCEDOR");
         results.add("robroche");
