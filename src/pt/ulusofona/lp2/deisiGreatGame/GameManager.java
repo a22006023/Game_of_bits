@@ -347,6 +347,7 @@ public class GameManager {
             tail.next = null;
             tail.next = head;
             count++;
+            nrTurnos++;
         }
         if(count == 0) {
             nextNode();
