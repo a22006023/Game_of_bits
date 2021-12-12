@@ -399,7 +399,7 @@ public class GameManager {
         Programmer programmerSave = getWinner();
         programmers.remove(getWinner());
         programmers.sort(Comparator.comparing(Programmer::getPos).reversed());
-        TreeSet<Programmer> programmers1 = new TreeSet<>(programmers);
+
 
         results.add("O GRANDE JOGO DO DEISI");
         results.add("");
@@ -410,7 +410,7 @@ public class GameManager {
         results.add(programmerSave.getName());
         results.add("");
         results.add("RESTANTES");
-        for (Programmer programmer : programmers1) {
+        for (Programmer programmer : programmers) {
             results.add(programmer.getName() + " " + programmer.getPos());
         }
         programmers.add(programmerSave);
