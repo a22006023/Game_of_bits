@@ -16,14 +16,9 @@ public class GameManager {
     List<Tool> boardTools = new ArrayList<>();
     List<Abyss> boardAbyss = new ArrayList<>();
     int dado = 0;
-
-
-
-
     int nrTurnos = 1;
 
-    public GameManager() {
-    }
+    public GameManager() {}
 
     public Abyss checkAbyss(int id, int pos) {
         switch (id) {

@@ -43,10 +43,14 @@ public class TestGameManager {
     @Test
     public void test03CreateInitialBoardValidatePlayerInfo(){
         String[][] teste = {
+                {"28","sranene","PHP; Java","Green"}
+        };
+        assertFalse(game.createInitialBoard(teste,20, null));
+        String[][] teste1 = {
                 {"", "", "", ""},
                 {"", "", "", ""}
         };
-        assertFalse(game.createInitialBoard(teste,20, null));
+        assertFalse(game.createInitialBoard(teste1,20, null));
         String[][] teste2 = {
                 {"28", "", "", ""},
                 {"", "", "", ""}
