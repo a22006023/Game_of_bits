@@ -101,6 +101,7 @@ public class GameManager {
         String[] languages;
         boardMap.clear();
         currentPlayer = null;
+        programmers.clear();
         if (head != null) {
             if (head.next.next != null && head.next.next != tail) {
                 head.next.next = null;
