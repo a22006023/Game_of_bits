@@ -187,10 +187,6 @@ public class GameManager {
             return false;
         }
 
-        if (boardMap.get(1).getProgrammers().size() == 1) {
-            return false;
-        }
-
         for (int x = 2; x <= boardSize; x++) {
             boardMap.put(x, new Empty(x));
         }
