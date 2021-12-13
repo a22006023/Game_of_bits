@@ -132,10 +132,16 @@ public class GameManager {
                 return false;
             }
 
+            if (Integer.parseInt(playerInfo[x][0]) < 0 || playerInfo[x][0] == null) {
+                return false;
+            }
+
+            if (playerInfo[x][2].equals("")||playerInfo[x][2] == null || playerInfo[x][2].equals(" ")) {
+                return false;
+            }
             for (int y = x + 1; y < jogadores; y++) {
-                if (Integer.parseInt(playerInfo[x][0]) < 0 || playerInfo[x][0] == null) {
-                    return false;
-                } else if (x == jogadores - 1) {
+
+                if (x == jogadores - 1) {
                     break;
                 } else if (playerInfo[x][0].equals(playerInfo[y][0])) {
                     return false;
