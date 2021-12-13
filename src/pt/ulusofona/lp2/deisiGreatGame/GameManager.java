@@ -133,7 +133,7 @@ public class GameManager {
                 return false;
             }
 
-            if (Integer.parseInt(playerInfo[x][0]) < 0 || playerInfo[x][0] == null || playerInfo[x][0].equals("")) {
+            if (Integer.parseInt(playerInfo[x][0]) < 0 || playerInfo[x][0] == null || playerInfo[x][0].equals("") || playerInfo[x][0].isEmpty()) {
                 return false;
             }
 
@@ -142,10 +142,7 @@ public class GameManager {
             }
 
             for (int y = x + 1; y < jogadores; y++) {
-
-                if (x == jogadores - 1) {
-                    break;
-                } else if (playerInfo[x][0].equals(playerInfo[y][0])) {
+                if (playerInfo[x][0].equals(playerInfo[y][0])) {
                     return false;
                 } else if (playerInfo[x][3].equals(playerInfo[y][3])) {
                     return false;
@@ -204,14 +201,14 @@ public class GameManager {
                 int checkPos = Integer.parseInt(abyssesAndTool[2]);
 
                 if (abyssesAndTool[0].equals("0")) {
-                    if (checkID >= 0 && checkID <= 9 && checkPos >= 0 && checkPos <= boardSize) {
+                    if (checkID >= 0 && checkID <= 9 && checkPos > 0 && checkPos <= boardSize) {
                         boardMap.put(checkPos, checkAbyss(checkID, checkPos));
                         boardAbyss.add(checkAbyss(checkID,checkPos));
                     } else {
                         return false;
                     }
                 } else if (abyssesAndTool[0].equals("1")) {
-                    if (checkID >= 0 && checkID <= 5 && checkPos >= 0 && checkPos <= boardSize) {
+                    if (checkID >= 0 && checkID <= 5 && checkPos > 0 && checkPos <= boardSize) {
                         boardMap.put(checkPos, checkTool(checkID, checkPos));
                         boardTools.add(checkTool(checkID,checkPos));
                     } else {
