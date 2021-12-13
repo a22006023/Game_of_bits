@@ -111,7 +111,8 @@ public class GameManager {
 
         int jogadores = playerInfo.length;
 
-        if (jogadores < 2 || jogadores > 4) {
+
+        if (jogadores <=1 || jogadores > 4) {
             return false;
         }
 
@@ -132,7 +133,7 @@ public class GameManager {
                 return false;
             }
 
-            if (Integer.parseInt(playerInfo[x][0]) < 0 || playerInfo[x][0] == null) {
+            if (Integer.parseInt(playerInfo[x][0]) < 0 || playerInfo[x][0] == null || playerInfo[x][0].equals("")) {
                 return false;
             }
 
