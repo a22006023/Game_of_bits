@@ -13,8 +13,6 @@ public class GameManager {
     ProgrammerColor color;
     List<Programmer> programmers = new ArrayList<>();
     TreeMap<Integer, Square> boardMap = new TreeMap<>();
-    List<Tool> boardTools = new ArrayList<>();
-    List<Abyss> boardAbyss = new ArrayList<>();
     int dado = 0;
     int nrTurnos = 1;
 
@@ -197,14 +195,12 @@ public class GameManager {
                 if (abyssesAndTool[0].equals("0")) {
                     if (checkID >= 0 && checkID <= 9 && checkPos > 0 && checkPos <= boardSize) {
                         boardMap.put(checkPos, checkAbyss(checkID, checkPos));
-                        boardAbyss.add(checkAbyss(checkID,checkPos));
                     } else {
                         return false;
                     }
                 } else if (abyssesAndTool[0].equals("1")) {
                     if (checkID >= 0 && checkID <= 5 && checkPos > 0 && checkPos <= boardSize) {
                         boardMap.put(checkPos, checkTool(checkID, checkPos));
-                        boardTools.add(checkTool(checkID,checkPos));
                     } else {
                         return false;
                     }

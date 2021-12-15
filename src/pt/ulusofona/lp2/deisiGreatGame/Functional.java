@@ -12,12 +12,12 @@ public class Functional extends Tool {
     public String react(Programmer programmer, int dado, TreeMap<Integer,Square> boardMap) {
         for (Tool tool : programmer.getTools()) {
             if (tool.getTitle().equals(this.title)) {
-                return "Já tens";
+                return "Já tens esta ferramenta otario, não precisas de mais lamento";
             }
         }
 
         programmer.addTool(this);
-        return "Functional";
+        return "Wow que sorte, és o rei!! Apanhaste a ferramenta Programação Funcional!";
 
     }
 

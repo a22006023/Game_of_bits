@@ -12,11 +12,11 @@ public class TeachersHelp extends Tool {
     public String react(Programmer programmer, int dado, TreeMap<Integer,Square> boardMap) {
         for (Tool tool : programmer.getTools()) {
             if (tool.getTitle().equals("Ajuda Do Professor")) {
-                return "Já tens";
+                return "Epah já tens esta ferramenta, para lá de chatear o stor";
             }
         }
         programmer.addTool(this);
-        return "TeachersHelp";
+        return "Oh very nice, apanhaste a ferramenta Ajuda Do Professor";
     }
 
 }

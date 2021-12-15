@@ -45,6 +45,11 @@ public class TestGameManager {
                 {"28","sranene","PHP; Java","Green"}
         };
         assertFalse(game.createInitialBoard(teste,20));
+        String[][] teste0 = {
+                {"28","sranene"," ","Green"},
+                {"31","robroche","Python","Purple"}
+        };
+        assertFalse(game.createInitialBoard(teste0,20, null));
         String[][] teste1 = {
                 {"", "", "", ""},
                 {"", "", "", ""}
@@ -310,6 +315,18 @@ public class TestGameManager {
 
         assertEquals("sranene : No tools | robroche : No tools",game.getProgrammersInfo());
     }
+
+    @Test
+    public void test01getCurrentPlayerID() {
+        String[][] mostrarAInes = {};
+        game.createInitialBoard(playerInfo3, 30, mostrarAInes);
+
+        assertEquals(16, game.getCurrentPlayerID());
+
+    }
+
+
+
 
 
 }

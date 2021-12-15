@@ -12,10 +12,11 @@ public class Inheritance extends Tool {
     public String react(Programmer programmer, int dado, TreeMap<Integer,Square> boardMap) {
         for (Tool tool : programmer.getTools()) {
             if (tool.getTitle().equals("Herança")) {
-                return "Já tens";
+                return "Já tens a ferramenta Herança, excusas de tentar apanhar outra vez," +
+                        " o teu pai já não volta";
             }
         }
         programmer.addTool(this);
-        return "Inheritance";
+        return "Parabéns! Parece que ganhaste a ferramenta Herança!";
     }
 }

@@ -12,11 +12,11 @@ public class UnitTests extends Tool{
     public String react(Programmer programmer, int dado, TreeMap<Integer,Square> boardMap) {
         for (Tool tool : programmer.getTools()) {
             if (tool.getTitle().equals("Testes unitários")) {
-                return "Já tens";
+                return "Não podes apanhar a ferramenta Testes unitários, porque já a tens, move along";
             }
         }
         programmer.addTool(this);
-        return "UnitTests";
+        return "Aff apanhaste a ferramenta Testes unitários.. lá vais ter de inventar uns testes quaisquer";
     }
 
 }
