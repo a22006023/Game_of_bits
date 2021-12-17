@@ -26,22 +26,22 @@ public class TestGameManager {
     };
 
     String[][] abyssesAndTools2 = {
-            {"1","0","1"},
-            {"1","1","2"},
-            {"1","2","3"},
-            {"1","3","4"},
-            {"1","4","5"},
-            {"1","5","6"},
-            {"0","0","7"},
-            {"0","1","8"},
-            {"0","2","9"},
-            {"0","3","10"},
-            {"0","4","11"},
-            {"0","5","12"},
-            {"0","6","13"},
-            {"0","7","14"},
-            {"0","8","15"},
-            {"0","9","16"}
+            {"1","0","2"},
+            {"1","1","3"},
+            {"1","2","4"},
+            {"1","3","5"},
+            {"1","4","6"},
+            {"1","5","7"},
+            {"0","0","8"},
+            {"0","1","9"},
+            {"0","2","10"},
+            {"0","3","11"},
+            {"0","4","12"},
+            {"0","5","13"},
+            {"0","6","14"},
+            {"0","7","15"},
+            {"0","8","16"},
+            {"0","9","17"}
     };
 
     String[][] playerInfo = {
@@ -309,22 +309,22 @@ public class TestGameManager {
 
         game.createInitialBoard(playerInfo, 30, abyssesAndTools2);
 
-        assertEquals("inheritance.png", game.getImagePng(1));
-        assertEquals("functional.png", game.getImagePng(2));
-        assertEquals("unit-tests.png", game.getImagePng(3));
-        assertEquals("catch.png", game.getImagePng(4));
-        assertEquals("IDE.png", game.getImagePng(5));
-        assertEquals("ajuda-professor.png", game.getImagePng(6));
-        assertEquals("syntax.png", game.getImagePng(7));
-        assertEquals("logic.png", game.getImagePng(8));
-        assertEquals("exception.png", game.getImagePng(9));
-        assertEquals("file-not-found-exception.png", game.getImagePng(10));
-        assertEquals("crash.png", game.getImagePng(11));
-        assertEquals("duplicated-code.png", game.getImagePng(12));
-        assertEquals("secondary-effects.png", game.getImagePng(13));
-        assertEquals("bsod.png", game.getImagePng(14));
-        assertEquals("infinite-loop.png", game.getImagePng(15));
-        assertEquals("core-dumped.png", game.getImagePng(16));
+        assertEquals("inheritance.png", game.getImagePng(2));
+        assertEquals("functional.png", game.getImagePng(3));
+        assertEquals("unit-tests.png", game.getImagePng(4));
+        assertEquals("catch.png", game.getImagePng(5));
+        assertEquals("IDE.png", game.getImagePng(6));
+        assertEquals("ajuda-professor.png", game.getImagePng(7));
+        assertEquals("syntax.png", game.getImagePng(8));
+        assertEquals("logic.png", game.getImagePng(9));
+        assertEquals("exception.png", game.getImagePng(10));
+        assertEquals("file-not-found-exception.png", game.getImagePng(11));
+        assertEquals("crash.png", game.getImagePng(12));
+        assertEquals("duplicated-code.png", game.getImagePng(13));
+        assertEquals("secondary-effects.png", game.getImagePng(14));
+        assertEquals("bsod.png", game.getImagePng(15));
+        assertEquals("infinite-loop.png", game.getImagePng(16));
+        assertEquals("core-dumped.png", game.getImagePng(17));
 
     }
 
@@ -528,7 +528,7 @@ public class TestGameManager {
     public void test01moveCurrentPLayerLooped(){
         game.createInitialBoard(playerInfo,20,abyssesAndTools2);
         game.moveCurrentPlayer(6);
-        game.getCurrentPlayer().setPos(15);
+        game.getCurrentPlayer().setPos(16);
         game.reactToAbyssOrTool();
         game.nextNode();
         game.nextNode();
@@ -561,14 +561,37 @@ public class TestGameManager {
         assertEquals("Já tens esta ferramenta I'm sorry :(",game.reactToAbyssOrTool());
     }
     @Test
-    public void test01crash(){
-        game.createInitialBoard(playerInfo,20,abyssesAndTools);
+    public void test01Crash(){
+        game.createInitialBoard(playerInfo,20,abyssesAndTools2);
         game.moveCurrentPlayer(2);
-        game.getCurrentPlayer().setPos(11);
+        game.getCurrentPlayer().setPos(12);
         assertEquals("Bem, parece que vais ter de voltar para a primeira casa, já não ganhas este jogo im sorry",game.reactToAbyssOrTool());
         assertEquals(1,game.getCurrentPlayer().getPos());
     }
+    @Test
+    public void test01DuplicatedCode(){
+        game.createInitialBoard(playerInfo,20,abyssesAndTools2);
+        game.moveCurrentPlayer(2);
+        game.getCurrentPlayer().setPos(13);
+        assertEquals("DuplicatedCode",game.reactToAbyssOrTool());
+    }
 
+    @Test
+    public void test02DuplicatedCodeHeranca(){
+        game.createInitialBoard(playerInfo,20,abyssesAndTools2);
+        game.moveCurrentPlayer(1);
+        game.reactToAbyssOrTool();
+        game.nextNode();
+        game.nextNode();
+        game.getCurrentPlayer().setPos(13);
+        assertEquals("safaste-te",game.reactToAbyssOrTool());
+    }
+    @Test
+    public void test01Heranca(){
+        game.createInitialBoard(playerInfo,20,abyssesAndTools2);
+        game.moveCurrentPlayer(1);
+        assertEquals("Parabéns! Parece que ganhaste a ferramenta Herança!",game.reactToAbyssOrTool());
+    }
     @Test
     public void test01Programmer() {
 
