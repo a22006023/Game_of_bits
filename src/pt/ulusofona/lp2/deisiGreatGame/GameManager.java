@@ -200,7 +200,7 @@ public class GameManager {
                     }
                 } else if (abyssesAndTool[0].equals("1")) {
                     if (checkPos > 0 && checkPos <= boardSize) {
-                        if(checkAbyss(checkID,checkPos)!= null) {
+                        if(checkTool(checkID,checkPos)!= null) {
                             boardMap.put(checkPos, checkTool(checkID, checkPos));
                         } else {
                             return false;
@@ -312,6 +312,10 @@ public class GameManager {
 
     public int getCurrentPlayerID() {
         return head.programmer.getId();
+    }
+
+    public Programmer getCurrentPlayer(){
+        return currentPlayer;
     }
 
     public boolean moveCurrentPlayer(int nrSpaces) {
