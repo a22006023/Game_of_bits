@@ -314,10 +314,6 @@ public class GameManager {
         return head.programmer.getId();
     }
 
-    public Programmer getCurrentPlayer(){
-        return currentPlayer;
-    }
-
     public boolean moveCurrentPlayer(int nrSpaces) {
         if (nrSpaces < 1 || nrSpaces > 6) {
             return false;
