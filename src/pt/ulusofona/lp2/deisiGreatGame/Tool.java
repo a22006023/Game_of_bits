@@ -13,7 +13,6 @@ public abstract class Tool extends Square{
             case 3 -> title = "Tratamento de Excepções";
             case 4 -> title = "IDE";
             case 5 -> title = "Ajuda Do Professor";
-            default -> title = "";
         }
     }
 

@@ -9,7 +9,4 @@
             this.next = null;
         }
 
-        public boolean hasNext(){
-            return this.next != null;
-        }
     }

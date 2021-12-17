@@ -9,12 +9,12 @@ import javax.swing.*;
 public class GameManager {
     Programmer currentPlayer;
     TreeMap<Integer, Square> boardMap = new TreeMap<>();
+    private final List<Programmer> programmers = new ArrayList<>();
+    private ProgrammerColor color;
     private Node head = null;
     private Node tail = null;
-    private ProgrammerColor color;
-    private List<Programmer> programmers = new ArrayList<>();
-    private int dado = 0;
     private int nrTurnos = 1;
+    private int dado = 0;
 
     public GameManager() {}
 

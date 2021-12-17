@@ -17,7 +17,6 @@ public abstract class Abyss extends Square {
             case 7 -> title = "Blue Screen of Death";
             case 8 -> title = "Ciclo infinito";
             case 9 -> title = "Segmentation Fault";
-            default -> title = "";
         }
     }
 
