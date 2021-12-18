@@ -4,10 +4,8 @@ import org.junit.Test;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.List;
-import java.util.Arrays;
-import java.util.TreeSet;
 
 import static org.junit.Assert.*;
 
@@ -41,7 +39,8 @@ public class TestGameManager {
             {"0","6","14"},
             {"0","7","15"},
             {"0","8","16"},
-            {"0","9","17"}
+            {"0","9","17"},
+            {"0","2","18"},
     };
 
     String[][] playerInfo = {
@@ -551,7 +550,7 @@ public class TestGameManager {
 
     }
     @Test
-    public void test01apanhaCatch(){
+    public void test01Catch2x(){
         game.createInitialBoard(playerInfo,20,abyssesAndTools);
         game.moveCurrentPlayer(2);
         game.getCurrentPlayer().setPos(15);
@@ -560,6 +559,7 @@ public class TestGameManager {
         game.nextNode();
         assertEquals("Já tens esta ferramenta I'm sorry :(",game.reactToAbyssOrTool());
     }
+
     @Test
     public void test01Crash(){
         game.createInitialBoard(playerInfo,20,abyssesAndTools2);
@@ -568,6 +568,7 @@ public class TestGameManager {
         assertEquals("Bem, parece que vais ter de voltar para a primeira casa, já não ganhas este jogo im sorry",game.reactToAbyssOrTool());
         assertEquals(1,game.getCurrentPlayer().getPos());
     }
+
     @Test
     public void test01DuplicatedCode(){
         game.createInitialBoard(playerInfo,20,abyssesAndTools2);
@@ -586,8 +587,53 @@ public class TestGameManager {
         game.getCurrentPlayer().setPos(13);
         assertEquals("safaste-te",game.reactToAbyssOrTool());
     }
+
     @Test
-    public void test01Heranca(){
+    public void test01Exception(){
+        String[][] abyssesAndTools = {
+                {"1","3","2"},
+                {"0","2","3"},
+                {"0","2","4"},
+        };
+
+        List<Tool> tools = new ArrayList<>();
+
+        game.createInitialBoard(playerInfo,20,abyssesAndTools);
+        game.moveCurrentPlayer(1);
+        game.reactToAbyssOrTool();
+        game.nextNode();
+        game.nextNode();
+        game.moveCurrentPlayer(1);
+        game.reactToAbyssOrTool();
+        assertEquals(tools, game.getCurrentPlayer().getTools());
+        game.nextNode();
+        game.nextNode();
+        game.moveCurrentPlayer(1);
+        game.reactToAbyssOrTool();
+        assertEquals(2, game.getCurrentPlayer().getPos());
+
+    }
+
+    @Test
+    public void test01Ide2x(){
+
+        String[][] abyssesAndTools = {
+                {"1","4","2"},
+                {"1","4","3"},
+        };
+
+        game.createInitialBoard(playerInfo,20, abyssesAndTools);
+        game.moveCurrentPlayer(1);
+        game.reactToAbyssOrTool();
+        game.nextNode();
+        game.nextNode();
+        game.moveCurrentPlayer(1);
+        assertEquals("Já tens este IDE, não te chega otario?", game.reactToAbyssOrTool());
+    }
+
+    @Test
+    public void test01Heranca2x(){
+        List<Square> lista = new ArrayList<>();
         game.createInitialBoard(playerInfo,20,abyssesAndTools2);
         game.moveCurrentPlayer(1);
         assertEquals("Parabéns! Parece que ganhaste a ferramenta Herança!",game.reactToAbyssOrTool());
