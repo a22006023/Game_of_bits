@@ -22,9 +22,9 @@ public class Loop extends Abyss{
             if (count == 0) {
                 programmer.setLoop(true);
                 boardMap.get(pos).getProgrammers().get(0).setLoop(false);
-                return "Loop";
+                return "Estás num loop infinito.. what the hell were you doing";
             }
-            return "safaste-te";
+            return "Tás safo my friend";
 
         } else {
             int count = 0;
@@ -39,7 +39,7 @@ public class Loop extends Abyss{
 
             if (count == 0) {
                 programmer.setLoop(true);
-                return "Loop";
+                return "Estás num loop infinito.. what the hell were you doing";
             }
 
 

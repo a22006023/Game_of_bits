@@ -14,12 +14,16 @@ public class SideEffects extends Abyss{
         for (Tool tool : programmer.getTools()) {
             if (tool.getTitle().equals("Programação Funcional")) {
                 programmer.removeTool(tool);
-                return "safaste-te";
+                return """
+                        Não tiveste efeitos secundários.. mas toma cuidadinho, nunca se sabe..
+
+                        *A Tool was removed from your inventory*""";
             }
         }
 
         programmer.setPos(programmer.getPosAnteriorAnterior());
         movePlayerAbyss(boardMap,programmer);
-        return "SideEffects";
+        return "Hehe bem burro, ficaste com efeitos secundários," +
+                "volta para a casa onde estavas antes da onde estavas :DDD";
     }
 }

@@ -27,13 +27,16 @@ public class SegmentationFault extends Abyss{
                     movePlayerAbyss(boardMap,programmers.get(0));
                 }
 
-                return "Segmentation Fault";
+                return "Vish tão todos com um SegmentationFault, este aqui é lixado..";
             }
 
-            return "safaste-te";
+            return """
+                    Very very very lucky..
+
+                    *A Tool was removed from your inventory*""";
         }
 
-        return "Tas safo por enquanto";
+        return "Tás safo por enquanto...";
 
     }
 }

@@ -574,7 +574,7 @@ public class TestGameManager {
         game.createInitialBoard(playerInfo,20,abyssesAndTools2);
         game.moveCurrentPlayer(2);
         game.getCurrentPlayer().setPos(13);
-        assertEquals("DuplicatedCode",game.reactToAbyssOrTool());
+        assertEquals("Oops, parece que agora tens código a duplicar, volta lá pra casa onde tavas, maroto",game.reactToAbyssOrTool());
     }
 
     @Test
@@ -665,12 +665,18 @@ public class TestGameManager {
         assertEquals("FileNotFound",game.reactToAbyssOrTool());
         assertEquals(8,game.getCurrentPlayer().getPos());
         game.moveCurrentPlayer(6);
-        assertEquals("Oh very nice, apanhaste a ferramenta Ajuda Do Professor",game.reactToAbyssOrTool());
+        assertEquals("""
+                Agora já podes pedir ajuda aos professores, mas não abuses
+
+                *Ajuda do Professor was added to your inventory*""",game.reactToAbyssOrTool());
         lista.add(game.boardMap.get(7));
         game.nextNode();
         game.nextNode();
         game.moveCurrentPlayer(4);
-        assertEquals("safaste-te",game.reactToAbyssOrTool());
+        assertEquals("""
+                Tás com sorte, não tens de recuar 3 casas
+
+                 *A Tool was removed from your inventory*""",game.reactToAbyssOrTool());
         lista.clear();
         assertEquals(11,game.getCurrentPlayer().getPos());
         assertEquals(lista,game.getCurrentPlayer().getTools());
@@ -706,7 +712,7 @@ public class TestGameManager {
         game.createInitialBoard(playerInfo,20,abyssesAndTools2);
         game.moveCurrentPlayer(1);
         game.getCurrentPlayer().setPos(16);
-        assertEquals("Loop",game.reactToAbyssOrTool());
+        assertEquals("Estás num loop infinito.. what the hell were you doing",game.reactToAbyssOrTool());
         game.nextNode();
         game.nextNode();
         assertFalse(game.moveCurrentPlayer(2));
@@ -740,7 +746,5 @@ public class TestGameManager {
         assertEquals(programmer.getPos(), 1);
 
     }
-
-
 
 }

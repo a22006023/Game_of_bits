@@ -12,11 +12,14 @@ public class Ide extends Tool {
     public String react(Programmer programmer, int dado, TreeMap<Integer,Square> boardMap) {
         for (Tool tool : programmer.getTools()) {
             if (tool.getTitle().equals("IDE")) {
-                return "Já tens este IDE, não te chega otario?";
+                return "Já tens este IDE, não achas que te chega?";
             }
         }
         programmer.addTool(this);
-        return "Cool, agora tens a ferramenta IDE em que podes tentar criar uns programazinhos";
+        return """
+                Cool, agora tens a ferramenta IDE em que podes tentar criar uns programazinhos
+
+                 *Ide was added to your inventory*""";
     }
 
 }

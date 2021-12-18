@@ -17,7 +17,10 @@ public class Functional extends Tool {
         }
 
         programmer.addTool(this);
-        return "Wow que sorte, és o rei!! Apanhaste a ferramenta Programação Funcional!";
+        return """
+                Wow que sorte, és o rei!! Apanhaste a ferramenta Programação Funcional!
+
+                 *Programação Funcional was added to your inventory*""";
 
     }
 

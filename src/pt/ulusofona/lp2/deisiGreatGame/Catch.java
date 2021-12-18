@@ -16,6 +16,9 @@ public class Catch extends Tool {
             }
         }
         programmer.addTool(this);
-        return "Uhhh apanhaste a ferramenta Tratamento de Excepções, agora podes te safar de alguns problemas bem chatos";
+        return """
+                Uhhh agora podes te safar de algumas exceções bem chatas
+
+                *Tratamento de Excepções was added to your inventory*""";
     }
 }

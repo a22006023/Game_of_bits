@@ -13,12 +13,12 @@ public class FileNotFound extends Abyss{
         for (Tool tool : programmer.getTools()) {
             if (tool.getTitle().equals("Tratamento de Excepções") || tool.getTitle().equals("Ajuda Do Professor")) {
                 programmer.removeTool(tool);
-                return "safaste-te";
+                return "Tás com sorte, não tens de recuar 3 casas\n\n *A Tool was removed from your inventory*";
             }
         }
         programmer.movePlayer(-3,200);
         movePlayerAbyss(boardMap,programmer);
-        return "FileNotFound";
+        return "Algo não está certo.. FileNotFoundException!! Im sorry, vais ter de recuar 3 casas amigo";
 
 
 

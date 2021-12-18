@@ -13,12 +13,15 @@ public class Exception extends Abyss{
         for (Tool tool : programmer.getTools()) {
             if (tool.getTitle().equals("Tratamento de Excepções") || tool.getTitle().equals("Ajuda Do Professor")) {
                 programmer.removeTool(tool);
-                return "safaste-te";
+                return """
+                        Hummm como tens uma ferramenta para o Exception, estás safo..
+
+                         *A Tool was removed from your inventory*""";
             }
         }
         programmer.movePlayer(-2,200);
         movePlayerAbyss(boardMap,programmer);
-        return "Exception";
+        return "Ai ai ai, caiste no Exception.. lamento, mas terás de recuar 2 casas";
 
 
 
