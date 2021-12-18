@@ -747,7 +747,7 @@ public class TestGameManager {
         game.nextNode();
         game.nextNode();
         game.moveCurrentPlayer(1);
-        assertEquals( "Wow que sorte, és o rei!! Apanhaste a ferramenta Programação Funcional!\n\n *Programação Funcional was added to your inventory*",game.reactToAbyssOrTool());
+        assertEquals( "Wow que sorte, és o rei!!!!!!!\n\n *Programação Funcional was added to your inventory*",game.reactToAbyssOrTool());
         lista.add(game.boardMap.get(2));
         lista.add(game.boardMap.get(3));
         assertEquals(lista,game.getCurrentPlayer().getTools());

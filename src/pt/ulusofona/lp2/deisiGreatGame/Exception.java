@@ -20,7 +20,5 @@ public class Exception extends Abyss{
         movePlayerAbyss(boardMap,programmer);
         return "Ai ai ai, caiste no Exception.. lamento, mas terás de recuar 2 casas";
 
-
-
     }
 }
