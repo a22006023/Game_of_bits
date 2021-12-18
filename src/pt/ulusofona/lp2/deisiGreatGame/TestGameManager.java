@@ -780,6 +780,35 @@ public class TestGameManager {
         assertFalse(game.moveCurrentPlayer(2));
 
     }
+    @Test
+    public void test02LoopTool(){
+        game.createInitialBoard(playerInfo,20,abyssesAndTools2);
+        game.moveCurrentPlayer(1);
+        game.reactToAbyssOrTool();
+        game.nextNode();
+        game.nextNode();
+        game.moveCurrentPlayer(1);
+        game.getCurrentPlayer().setPos(15);
+        game.moveCurrentPlayer(1);
+        assertEquals("Estás num loop infinito.. what the hell were you doing",game.reactToAbyssOrTool());
+        game.moveCurrentPlayer(1);
+        game.reactToAbyssOrTool();
+        game.nextNode();
+        game.nextNode();
+        game.moveCurrentPlayer(1);
+        assertEquals( "Wow que sorte, és o rei!!!!!!!\n\n *Programação Funcional was added to your inventory*",game.reactToAbyssOrTool());
+        game.nextNode();
+        game.nextNode();
+        game.moveCurrentPlayer(1);
+        game.getCurrentPlayer().setPos(15);
+        game.moveCurrentPlayer(1);
+        assertEquals("Tás safo my friend\n\n *A Tool was removed from your inventory*",game.reactToAbyssOrTool());
+        game.nextNode();
+        assertFalse(game.moveCurrentPlayer(2));
+        game.nextNode();
+        assertTrue(game.moveCurrentPlayer(2));
+
+    }
 
 
     @Test
