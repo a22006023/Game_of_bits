@@ -557,7 +557,7 @@ public class TestGameManager {
         game.nextNode();
         game.nextNode();
         game.getCurrentPlayer().setPos(15);
-        assertEquals("Uhhh agora podes te safar de algumas exceções bem chatas\n\n *Tratamento de Excepções was added to your inventory*",game.reactToAbyssOrTool());
+        assertEquals("Uhhh agora podes te safar de algumas exceções bem chatas *Tratamento de Excepções was added to your inventory*",game.reactToAbyssOrTool());
         game.nextNode();
         game.nextNode();
         assertEquals("Já tens esta ferramenta I'm sorry :(",game.reactToAbyssOrTool());
@@ -591,7 +591,7 @@ public class TestGameManager {
         game.nextNode();
         game.nextNode();
         game.getCurrentPlayer().setPos(13);
-        assertEquals("Muito bem, usaste a Herança para evitar código duplicado...até dás a ideia de que és inteligente\n\n *A Tool was removed from your inventory*",game.reactToAbyssOrTool());
+        assertEquals("Muito bem, usaste a Herança para evitar código duplicado...até dás a ideia de que és inteligente *A Tool was removed from your inventory*",game.reactToAbyssOrTool());
     }
 
     @Test
@@ -654,7 +654,7 @@ public class TestGameManager {
         List<Square> lista = new ArrayList<>();
         game.createInitialBoard(playerInfo,20,abyssesAndTools2);
         game.moveCurrentPlayer(1);
-        assertEquals("Parabéns! Ganhaste a habilidade de fazer herança no teu programa, aproveita colega\n\n *Herança was added to your inventory*",game.reactToAbyssOrTool());
+        assertEquals("Parabéns! Ganhaste a habilidade de fazer herança no teu programa, aproveita colega *Herança was added to your inventory*",game.reactToAbyssOrTool());
         lista.add(game.boardMap.get(2));
         assertEquals(lista,game.getCurrentPlayer().getTools());
         game.nextNode();
@@ -674,7 +674,7 @@ public class TestGameManager {
         game.nextNode();
         game.nextNode();
         game.moveCurrentPlayer(4);
-        assertEquals("Agora já podes pedir ajuda aos professores, mas não abuses\n\n *Ajuda do Professor was added to your inventory*",game.reactToAbyssOrTool());
+        assertEquals("Agora já podes pedir ajuda aos professores, mas não abuses *Ajuda do Professor was added to your inventory*",game.reactToAbyssOrTool());
         assertEquals("Epah já tens esta ferramenta, para lá de chatear o stor",game.reactToAbyssOrTool());
         assertEquals(lista,game.getCurrentPlayer().getTools());
     }
@@ -691,7 +691,7 @@ public class TestGameManager {
         assertEquals("Algo não está certo.. FileNotFoundException!! Im sorry, vais ter de recuar 3 casas amigo",game.reactToAbyssOrTool());
         assertEquals(8,game.getCurrentPlayer().getPos());
         game.moveCurrentPlayer(6);
-        assertEquals("Agora já podes pedir ajuda aos professores, mas não abuses\n\n *Ajuda do Professor was added to your inventory*",game.reactToAbyssOrTool());
+        assertEquals("Agora já podes pedir ajuda aos professores, mas não abuses *Ajuda do Professor was added to your inventory*",game.reactToAbyssOrTool());
         lista.add(game.boardMap.get(7));
         game.nextNode();
         game.nextNode();
@@ -705,26 +705,36 @@ public class TestGameManager {
     @Test
     public void test01LogicVsTool() {
         String[][] abyssesAndTools = {
-                {"1","2","2"},
-                {"0","1","3"},
-                {"0","1","9"}
+                {"1","0","2"},
+                {"1","2","3"},
+                {"0","1","4"},
+                {"0","1","10"}
         };
 
-        List<Tool> tools = new ArrayList<>();
+        List<Square> tools = new ArrayList<>();
 
         game.createInitialBoard(playerInfo,20, abyssesAndTools);
+        tools.add(game.boardMap.get(2));
         game.moveCurrentPlayer(1);
         game.reactToAbyssOrTool();
-        assertNotEquals(tools, game.getCurrentPlayer().getTools());
+        assertEquals(tools, game.getCurrentPlayer().getTools());
         game.nextNode();
         game.nextNode();
         game.moveCurrentPlayer(1);
         game.reactToAbyssOrTool();
+        tools.add(game.boardMap.get(3));
+        assertEquals(tools,game.getCurrentPlayer().getTools());
+        game.nextNode();
+        game.nextNode();
+        game.moveCurrentPlayer(1);
+        game.reactToAbyssOrTool();
+        tools.remove(game.boardMap.remove(3));
+        assertEquals(tools,game.getCurrentPlayer().getTools());
         game.nextNode();
         game.nextNode();
         game.moveCurrentPlayer(6);
         game.reactToAbyssOrTool();
-        assertEquals(6, game.getCurrentPlayer().getPos());
+        assertEquals(7, game.getCurrentPlayer().getPos());
     }
 
     @Test
@@ -747,7 +757,7 @@ public class TestGameManager {
         game.nextNode();
         game.nextNode();
         game.moveCurrentPlayer(1);
-        assertEquals( "Wow que sorte, és o rei!!!!!!!\n\n *Programação Funcional was added to your inventory*",game.reactToAbyssOrTool());
+        assertEquals( "Wow que sorte, és o rei!!!!!!! *Programação Funcional was added to your inventory*",game.reactToAbyssOrTool());
         lista.add(game.boardMap.get(2));
         lista.add(game.boardMap.get(3));
         assertEquals(lista,game.getCurrentPlayer().getTools());
@@ -756,7 +766,7 @@ public class TestGameManager {
         game.moveCurrentPlayer(1);
         game.getCurrentPlayer().setPos(15);
         game.moveCurrentPlayer(1);
-        assertEquals("Tás safo my friend\n\n *A Tool was removed from your inventory*",game.reactToAbyssOrTool());
+        assertEquals("Tás safo my friend *A Tool was removed from your inventory*",game.reactToAbyssOrTool());
         lista.remove(game.boardMap.get(3));
         assertEquals(lista,game.getCurrentPlayer().getTools());
         game.nextNode();
@@ -796,18 +806,17 @@ public class TestGameManager {
         game.nextNode();
         game.nextNode();
         game.moveCurrentPlayer(1);
-        assertEquals( "Wow que sorte, és o rei!!!!!!!\n\n *Programação Funcional was added to your inventory*",game.reactToAbyssOrTool());
+        assertEquals( "Wow que sorte, és o rei!!!!!!! *Programação Funcional was added to your inventory*",game.reactToAbyssOrTool());
         game.nextNode();
         game.nextNode();
         game.moveCurrentPlayer(1);
         game.getCurrentPlayer().setPos(15);
         game.moveCurrentPlayer(1);
-        assertEquals("Tás safo my friend\n\n *A Tool was removed from your inventory*",game.reactToAbyssOrTool());
+        assertEquals("Tás safo my friend *A Tool was removed from your inventory*",game.reactToAbyssOrTool());
         game.nextNode();
         assertFalse(game.moveCurrentPlayer(2));
         game.nextNode();
         assertTrue(game.moveCurrentPlayer(2));
-
     }
 
 
