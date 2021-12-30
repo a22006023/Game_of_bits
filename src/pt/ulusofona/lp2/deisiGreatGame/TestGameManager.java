@@ -1,4 +1,4 @@
-package pt.ulusofona.lp2.deisiGreatGame;
+/*package pt.ulusofona.lp2.deisiGreatGame;
 
 import org.junit.Test;
 
@@ -1002,4 +1002,4 @@ public class TestGameManager {
         Main.main(teste);
     }
 
-}
+}*/

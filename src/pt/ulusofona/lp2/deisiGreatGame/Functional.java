@@ -12,7 +12,7 @@ public class Functional extends Tool {
     public String react(Programmer programmer, int dado, TreeMap<Integer,Square> boardMap) {
         for (Tool tool : programmer.getTools()) {
             if (tool.getTitle().equals(this.title)) {
-                return "Já tens esta ferramenta otario, não precisas de mais lamento";
+                return "Já tens esta ferramenta, não precisas de mais lamento";
             }
         }
 

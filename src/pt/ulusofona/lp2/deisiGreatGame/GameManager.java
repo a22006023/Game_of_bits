@@ -1,12 +1,14 @@
 package pt.ulusofona.lp2.deisiGreatGame;
 
 import java.awt.*;
+import java.io.File;
 import java.util.*;
 import java.util.List;
 import javax.swing.*;
 
 
 public class GameManager {
+
     Programmer currentPlayer;
     TreeMap<Integer, Square> boardMap = new TreeMap<>();
     private final List<Programmer> programmers = new ArrayList<>();
@@ -15,6 +17,7 @@ public class GameManager {
     private Node tail = null;
     private int nrTurnos = 1;
     private int dado = 0;
+
 
     public GameManager() {}
 
@@ -27,7 +30,7 @@ public class GameManager {
                 return new Logic(id, pos);
             }
             case 2 -> {
-                return new Exception(id, pos);
+                return new ExceptionAbyss(id, pos);
             }
             case 3 -> {
                 return new FileNotFound(id, pos);
@@ -84,12 +87,25 @@ public class GameManager {
 
     }
 
-    public boolean createInitialBoard(String[][] playerInfo, int boardSize) {
-        return createInitialBoard(playerInfo, boardSize, null);
+    public boolean saveGame(File file){
+
+        if(file.canWrite()){
+            File sla = new File("macaco");
+
+        }
+        return false;
+    }
+
+    public boolean loadGame(File file){
+        return false;
+    }
+
+    public void createInitialBoard(String[][] playerInfo, int boardSize) throws InvalidInitialBoardException{
+        createInitialBoard(playerInfo, boardSize, null);
 
     }
 
-    public boolean createInitialBoard(String[][] playerInfo, int boardSize, String[][] abyssesAndTools) {
+    public void createInitialBoard(String[][] playerInfo, int boardSize, String[][] abyssesAndTools) throws InvalidInitialBoardException {
         String[] languages;
         boardMap.clear();
         currentPlayer = null;
@@ -110,39 +126,39 @@ public class GameManager {
 
 
         if (jogadores <=1 || jogadores > 4) {
-            return false;
+            throw new InvalidInitialBoardException("Numero Jogadores invalidos");
         }
 
         if (jogadores * 2 > boardSize) {
-            return false;
+            throw new InvalidInitialBoardException("BoardSize insuficiente");
         }
 
         for (int x = 0; x < jogadores; x++) {
 
             if (playerInfo[x][1].equals("") || playerInfo[x][1] == null || playerInfo[x][1].equals(" ")) {
-                return false;
+                throw new InvalidInitialBoardException("Nome Invalido");
             }
 
             if (!((playerInfo[x][3].equals(ProgrammerColor.GREEN.toString())) ||
                     (playerInfo[x][3].equals(ProgrammerColor.BROWN.toString()))
                     || (playerInfo[x][3].equals(ProgrammerColor.PURPLE.toString())) ||
                     (playerInfo[x][3].equals(ProgrammerColor.BLUE.toString())))) {
-                return false;
+                throw new InvalidInitialBoardException("Cor Invalida");
             }
 
             if (Integer.parseInt(playerInfo[x][0]) < 0 || playerInfo[x][0] == null || playerInfo[x][0].equals("") || playerInfo[x][0].isEmpty()) {
-                return false;
+                throw new InvalidInitialBoardException("ID Invalido");
             }
 
             if (playerInfo[x][2].equals("") || playerInfo[x][2] == null || playerInfo[x][2].equals(" ")) {
-                return false;
+                throw new InvalidInitialBoardException("Linguagens Invalidas");
             }
 
             for (int y = x + 1; y < jogadores; y++) {
                 if (playerInfo[x][0].equals(playerInfo[y][0])) {
-                    return false;
+                    throw new InvalidInitialBoardException("ID repetido");
                 } else if (playerInfo[x][3].equals(playerInfo[y][3])) {
-                    return false;
+                    throw new InvalidInitialBoardException("Cor repetida");
                 }
             }
         }
@@ -194,25 +210,28 @@ public class GameManager {
                         if(checkAbyss(checkID,checkPos) != null) {
                             boardMap.put(checkPos, checkAbyss(checkID, checkPos));
                         } else {
-                            return false;
+                            throw new InvalidInitialBoardException("Abyss Invalido");
                         }
                     } else {
-                        return false; }
+                        throw new InvalidInitialBoardException("Posição Invalida");
+                    }
                 } else if (abyssesAndTool[0].equals("1")) {
                     if (checkPos > 0 && checkPos <= boardSize) {
                         if(checkTool(checkID,checkPos)!= null) {
                             boardMap.put(checkPos, checkTool(checkID, checkPos));
                         } else {
-                            return false;
+                            throw new InvalidInitialBoardException("Tool Invalida");
                         }
                     } else {
-                        return false; }
+                        throw new InvalidInitialBoardException("Posição Invalida");
+                    }
                 } else {
-                    return false; }
+                    throw new InvalidInitialBoardException("Não é tool nem abismo");
+                }
             }
         }
 
-        return true;
+
 }
 
     public String getImagePng(int position) {

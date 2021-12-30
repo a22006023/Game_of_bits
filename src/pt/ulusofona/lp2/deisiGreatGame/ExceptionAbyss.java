@@ -2,9 +2,9 @@ package pt.ulusofona.lp2.deisiGreatGame;
 
 import java.util.TreeMap;
 
-public class Exception extends Abyss{
+public class ExceptionAbyss extends Abyss{
 
-    public Exception(int id, int pos) {
+    public ExceptionAbyss(int id, int pos) {
         super(id, pos);
     }
 
