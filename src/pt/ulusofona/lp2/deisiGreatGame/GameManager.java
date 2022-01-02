@@ -143,11 +143,15 @@ public class GameManager {
         return true;
     }
 
-    public boolean loadGame(File file) throws FileNotFoundException {
+    public boolean loadGame(File file)  {
 
             Scanner sc = null;
+        try {
             sc = new Scanner(file);
-            int boardSize = 0;
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        int boardSize = 0;
             int jogadores = Integer.parseInt(sc.nextLine());
             int abyssesAndToolsLenth = Integer.parseInt(sc.nextLine());
             int turnos = 0;
