@@ -120,6 +120,7 @@ public class GameManager {
             if(!file.createNewFile()){
                 return false;
             }
+            return false;
         }
 
         FileWriter fw = new FileWriter(file);
@@ -148,6 +149,11 @@ public class GameManager {
     }
 
     public boolean loadGame(File file) throws FileNotFoundException, InvalidInitialBoardException {
+
+        if(!file.canRead()){
+            return false;
+        }
+
         Scanner sc = new Scanner(file);
         int boardSize = 0;
         int jogadores = Integer.parseInt(sc.nextLine());
@@ -223,6 +229,8 @@ public class GameManager {
             }else if (line.startsWith("Turnos: ")) {
                 line = line.replace("Turnos: ","");
                 turnos = Integer.parseInt(line);
+            }else{
+                return false;
             }
 
         }
