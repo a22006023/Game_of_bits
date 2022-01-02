@@ -159,7 +159,15 @@ public class GameManager {
     }
 
     public boolean loadGame(File file) {
-
+        if(!file.canRead()){
+            return false;
+        }
+        if(!file.exists()){
+            return false;
+        }
+        if(!file.isFile()){
+            return false;
+        }
         Scanner sc = null;
         try {
             sc = new Scanner(file);
