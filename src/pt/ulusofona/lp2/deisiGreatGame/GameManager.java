@@ -152,8 +152,6 @@ public class GameManager {
             e.printStackTrace();
         }
 
-
-
         return true;
     }
 
