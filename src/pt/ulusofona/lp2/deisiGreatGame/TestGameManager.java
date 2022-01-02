@@ -86,7 +86,7 @@ public class TestGameManager {
         }
         try {
             game.loadGame(file);
-        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
