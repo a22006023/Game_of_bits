@@ -115,7 +115,7 @@ public class GameManager {
 
     }
 
-    public boolean saveGame(File file) {
+    public boolean saveGame(File file) throws IOException {
         FileWriter fw = null;
         try {
             if(!file.canWrite()){
@@ -149,7 +149,7 @@ public class GameManager {
         return true;
     }
 
-    public boolean loadGame(File file) {
+    public boolean loadGame(File file) throws IOException{
 
         Scanner sc = null;
         try {
