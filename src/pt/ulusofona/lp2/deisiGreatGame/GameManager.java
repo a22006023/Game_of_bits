@@ -21,41 +21,42 @@ public class GameManager {
     private int dado = 0;
 
 
-    public GameManager() {}
+    public GameManager() {
+    }
 
     public Abyss checkAbyss(int id, int pos) {
         switch (id) {
             case 0 -> {
-                return new Syntax(0,id, pos);
+                return new Syntax(0, id, pos);
             }
             case 1 -> {
-                return new Logic(0,id, pos);
+                return new Logic(0, id, pos);
             }
             case 2 -> {
-                return new ExceptionAbyss(0,id, pos);
+                return new ExceptionAbyss(0, id, pos);
             }
             case 3 -> {
-                return new FileNotFound(0,id, pos);
+                return new FileNotFound(0, id, pos);
             }
             case 4 -> {
-                return new Crash(0,id, pos);
+                return new Crash(0, id, pos);
             }
             case 5 -> {
-                return new DuplicatedCode(0,id, pos);
+                return new DuplicatedCode(0, id, pos);
             }
             case 6 -> {
-                return new SideEffects(0,id, pos);
+                return new SideEffects(0, id, pos);
             }
             case 7 -> {
-                return new BlueScreen(0,id, pos);
+                return new BlueScreen(0, id, pos);
             }
             case 8 -> {
-                return new Loop(0,id, pos);
+                return new Loop(0, id, pos);
             }
             case 9 -> {
-                return new SegmentationFault(0,id, pos);
+                return new SegmentationFault(0, id, pos);
             }
-            default ->  {
+            default -> {
                 return null;
             }
         }
@@ -115,160 +116,174 @@ public class GameManager {
 
     }
 
-    public boolean saveGame(File file) throws IOException {
+    public boolean saveGame(File file) {
+        StringBuilder result = new StringBuilder();
         FileWriter fw = null;
-        fw = new FileWriter(file);
+        try {
+            fw = new FileWriter(file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         BufferedWriter bw = new BufferedWriter(fw);
-            bw.write(""+programmers.size() + "\n");
-            bw.write(""+(boardTool.size() + boardAbyss.size()) + "\n");
-            bw.write("Player: " + head.getProgrammer().toStringToFile() +"\n");
-            if(head.next != tail){
-                bw.write("Player: " + head.next.getProgrammer().toStringToFile() +"\n");
-            }
-            if(head.next.next != tail){
-                bw.write("Player: " +head.next.next.getProgrammer().toStringToFile() +"\n");
-            }
-            bw.write("Player: "+tail.getProgrammer().toStringToFile() +"\n");
-            for(Tool tool : boardTool ){
-                bw.write("Tool: " + tool.getId() + "," +tool.getPos()+ "\n");
-            }
-            for(Abyss abyss : boardAbyss){
-                bw.write("Abyss: "+abyss.getId() +","+abyss.getPos() + "\n");
-            }
-            bw.write("BoardSize: "+boardMap.size() + "\n");
-            bw.write("Turnos: "+nrTurnos);
+        result.append(programmers.size()).append("\n");
+        result.append(boardTool.size() + boardAbyss.size()).append("\n");
+        result.append("Player: ").append(head.getProgrammer().toStringToFile()).append("\n");
+        if (head.next != tail) {
+            result.append("Player: ").append(head.next.getProgrammer().toStringToFile()).append("\n");
+        }
+        if (head.next.next != tail) {
+            result.append("Player: ").append(head.next.next.getProgrammer().toStringToFile()).append("\n");
+        }
+        result.append("Player: ").append(tail.getProgrammer().toStringToFile()).append("\n");
+        for (Tool tool : boardTool) {
+            result.append("Tool: ").append(tool.getId()).append(",").append(tool.getPos()).append("\n");
+        }
+        for (Abyss abyss : boardAbyss) {
+            result.append("Abyss: ").append(abyss.getId()).append(",").append(abyss.getPos()).append("\n");
+        }
+        result.append("BoardSize: ").append(boardMap.size()).append("\n");
+        result.append("Turnos: ").append(nrTurnos);
+        try {
+            bw.write(result.toString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
             bw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
 
         return true;
     }
 
-    public boolean loadGame(File file)  {
+    public boolean loadGame(File file) {
 
-            Scanner sc = null;
+        Scanner sc = null;
         try {
             sc = new Scanner(file);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
         int boardSize = 0;
-            int jogadores = Integer.parseInt(sc.nextLine());
-            int abyssesAndToolsLenth = Integer.parseInt(sc.nextLine());
-            int turnos = 0;
-            List<Programmer> players = new ArrayList<>();
-            String[][] playerInfo = new String[jogadores][4];
-            String[][] abyssesAndTools = new String[abyssesAndToolsLenth][3];
-            TreeSet<String> languages;
+        int jogadores = Integer.parseInt(sc.nextLine());
+        int abyssesAndToolsLenth = Integer.parseInt(sc.nextLine());
+        int turnos = 0;
+        List<Programmer> players = new ArrayList<>();
+        String[][] playerInfo = new String[jogadores][4];
+        String[][] abyssesAndTools = new String[abyssesAndToolsLenth][3];
+        TreeSet<String> languages;
 
-            boolean loop;
-            boolean status;
+        boolean loop;
+        boolean status;
 
-            int x = 0;
-            int y = 0;
-            while (sc.hasNext()) {
-                String line = sc.nextLine();
-                List<Tool> tools = new ArrayList<>();
-                if (line.startsWith("Player: ")) {
+        int x = 0;
+        int y = 0;
+        while (sc.hasNext()) {
+            String line = sc.nextLine();
+            List<Tool> tools = new ArrayList<>();
+            if (line.startsWith("Player: ")) {
 
-                    line = line.replace("Player: ", "");
-                    String[] playerData = line.split("/");
+                line = line.replace("Player: ", "");
+                String[] playerData = line.split("/");
 
-                    playerInfo[x][0] = playerData[0];
-                    playerInfo[x][1] = playerData[1];
-                    playerInfo[x][2] = playerData[6];
-                    playerInfo[x][3] = playerData[2];
+                playerInfo[x][0] = playerData[0];
+                playerInfo[x][1] = playerData[1];
+                playerInfo[x][2] = playerData[6];
+                playerInfo[x][3] = playerData[2];
 
-                    if (!playerData[7].equals("No tools")) {
+                if (!playerData[7].equals("No tools")) {
 
-                        String[] toolsString = playerData[7].split(";");
-                        for (String toolCheck : toolsString) {
-                            Tool tool = checkTool(-1, -1, toolCheck);
-                            tools.add(tool);
-                        }
+                    String[] toolsString = playerData[7].split(";");
+                    for (String toolCheck : toolsString) {
+                        Tool tool = checkTool(-1, -1, toolCheck);
+                        tools.add(tool);
                     }
-                    switch (playerData[2]) {
-                        case "Green" -> color = ProgrammerColor.GREEN;
-                        case "Blue" -> color = ProgrammerColor.BLUE;
-                        case "Brown" -> color = ProgrammerColor.BROWN;
-                        case "Purple" -> color = ProgrammerColor.PURPLE;
-                    }
-                    loop = !playerData[8].equals("No Loop");
-                    status = !playerData[9].equals("Em Jogo");
-                    String[] language = playerData[6].split(";");
-                    languages = new TreeSet<>(Arrays.asList(language));
-                    Programmer player = new Programmer(Integer.parseInt(playerData[0]),playerData[1],color,
-                            Integer.parseInt(playerData[3]),Integer.parseInt(playerData[4]),
-                            Integer.parseInt(playerData[5]),languages,tools,loop,status);
-                    players.add(player);
-
-                    x++;
-
-                } else if (line.startsWith("Tool: ")) {
-                    line = line.replace("Tool: ","");
-                    String[] toolData = line.split(",");
-                    abyssesAndTools[y][0] = "1";
-                    abyssesAndTools[y][1] = toolData[0];
-                    abyssesAndTools[y][2] = toolData[1];
-                    y++;
-
-                }else if(line.startsWith("Abyss: ")){
-                    line = line.replace("Abyss: ","");
-                    String[] abyssData = line.split(",");
-                    abyssesAndTools[y][0] = "0";
-                    abyssesAndTools[y][1] = abyssData[0];
-                    abyssesAndTools[y][2] = abyssData[1];
-                    y++;
-
-                } else if (line.startsWith("BoardSize: ")) {
-                    line = line.replace("BoardSize: ","");
-                    boardSize = Integer.parseInt(line);
-                }else if (line.startsWith("Turnos: ")) {
-                    line = line.replace("Turnos: ","");
-                    turnos = Integer.parseInt(line);
-                }else{
-                    return false;
                 }
+                switch (playerData[2]) {
+                    case "Green" -> color = ProgrammerColor.GREEN;
+                    case "Blue" -> color = ProgrammerColor.BLUE;
+                    case "Brown" -> color = ProgrammerColor.BROWN;
+                    case "Purple" -> color = ProgrammerColor.PURPLE;
+                }
+                loop = !playerData[8].equals("No Loop");
+                status = !playerData[9].equals("Em Jogo");
+                String[] language = playerData[6].split(";");
+                languages = new TreeSet<>(Arrays.asList(language));
+                Programmer player = new Programmer(Integer.parseInt(playerData[0]), playerData[1], color,
+                        Integer.parseInt(playerData[3]), Integer.parseInt(playerData[4]),
+                        Integer.parseInt(playerData[5]), languages, tools, loop, status);
+                players.add(player);
 
+                x++;
+
+            } else if (line.startsWith("Tool: ")) {
+                line = line.replace("Tool: ", "");
+                String[] toolData = line.split(",");
+                abyssesAndTools[y][0] = "1";
+                abyssesAndTools[y][1] = toolData[0];
+                abyssesAndTools[y][2] = toolData[1];
+                y++;
+
+            } else if (line.startsWith("Abyss: ")) {
+                line = line.replace("Abyss: ", "");
+                String[] abyssData = line.split(",");
+                abyssesAndTools[y][0] = "0";
+                abyssesAndTools[y][1] = abyssData[0];
+                abyssesAndTools[y][2] = abyssData[1];
+                y++;
+
+            } else if (line.startsWith("BoardSize: ")) {
+                line = line.replace("BoardSize: ", "");
+                boardSize = Integer.parseInt(line);
+            } else if (line.startsWith("Turnos: ")) {
+                line = line.replace("Turnos: ", "");
+                turnos = Integer.parseInt(line);
+            } else {
+                return false;
             }
-            try {
-                createInitialBoard(playerInfo,boardSize,abyssesAndTools);
-            } catch (InvalidInitialBoardException e) {
-                e.printStackTrace();
+
+        }
+        try {
+            createInitialBoard(playerInfo, boardSize, abyssesAndTools);
+        } catch (InvalidInitialBoardException e) {
+            e.printStackTrace();
+        }
+        boardMap.get(1).getProgrammers().clear();
+        if (head != null) {
+            if (head.next.next != null && head.next.next != tail) {
+                head.next.next = null;
             }
-            boardMap.get(1).getProgrammers().clear();
-            if (head != null) {
-                if (head.next.next != null && head.next.next != tail) {
-                    head.next.next = null;
-                }
-                if (head.next != tail) {
-                    head.next = null;
-                }
-                head = null;
-                tail = null;
+            if (head.next != tail) {
+                head.next = null;
             }
-            for (Programmer player : players) {
-                Node newNode = new Node(player);
-                if (head == null) {
-                    head = newNode;
-                } else {
-                    tail.next = newNode;
-                }
-                tail = newNode;
-                tail.next = head;
+            head = null;
+            tail = null;
+        }
+        for (Programmer player : players) {
+            Node newNode = new Node(player);
+            if (head == null) {
+                head = newNode;
+            } else {
+                tail.next = newNode;
             }
-            players.sort(Comparator.comparing(Programmer::getId));
-            for(int i = 0;i<programmers.size();i++){
-                programmers.set(i, players.get(i));
-            }
-            nrTurnos = turnos;
-            for(Programmer programmer : programmers){
-                boardMap.get(programmer.getPos()).addProgrammer(programmer);
-            }
+            tail = newNode;
+            tail.next = head;
+        }
+        players.sort(Comparator.comparing(Programmer::getId));
+        for (int i = 0; i < programmers.size(); i++) {
+            programmers.set(i, players.get(i));
+        }
+        nrTurnos = turnos;
+        for (Programmer programmer : programmers) {
+            boardMap.get(programmer.getPos()).addProgrammer(programmer);
+        }
 
         return true;
     }
 
-    public void createInitialBoard(String[][] playerInfo, int boardSize) throws InvalidInitialBoardException{
+    public void createInitialBoard(String[][] playerInfo, int boardSize) throws InvalidInitialBoardException {
         createInitialBoard(playerInfo, boardSize, null);
 
     }
@@ -296,7 +311,7 @@ public class GameManager {
         int jogadores = playerInfo.length;
 
 
-        if (jogadores <=1 || jogadores > 4) {
+        if (jogadores <= 1 || jogadores > 4) {
             throw new InvalidInitialBoardException("Numero Jogadores invalidos");
         }
 
@@ -371,15 +386,15 @@ public class GameManager {
             boardMap.put(x, new Empty(x));
         }
 
-        if(abyssesAndTools != null) {
+        if (abyssesAndTools != null) {
             for (String[] abyssesAndTool : abyssesAndTools) {
                 int checkID = Integer.parseInt(abyssesAndTool[1]);
                 int checkPos = Integer.parseInt(abyssesAndTool[2]);
 
                 if (abyssesAndTool[0].equals("0")) {
                     if (checkPos > 0 && checkPos <= boardSize) {
-                        if(checkAbyss(checkID,checkPos) != null) {
-                            Abyss abyss = checkAbyss(checkID,checkPos);
+                        if (checkAbyss(checkID, checkPos) != null) {
+                            Abyss abyss = checkAbyss(checkID, checkPos);
                             boardMap.put(checkPos, abyss);
                             boardAbyss.add(abyss);
                         } else {
@@ -390,8 +405,8 @@ public class GameManager {
                     }
                 } else if (abyssesAndTool[0].equals("1")) {
                     if (checkPos > 0 && checkPos <= boardSize) {
-                        if(checkTool(checkID,checkPos, "")!= null) {
-                            Tool tool = checkTool(checkID,checkPos,"");
+                        if (checkTool(checkID, checkPos, "") != null) {
+                            Tool tool = checkTool(checkID, checkPos, "");
                             boardMap.put(checkPos, tool);
                             boardTool.add(tool);
                         } else {
@@ -407,7 +422,7 @@ public class GameManager {
         }
 
 
-}
+    }
 
     public String getImagePng(int position) {
         if (position < 1 || position > boardMap.size()) {
@@ -416,7 +431,7 @@ public class GameManager {
         if (position == boardMap.size()) {
             return "glory.png";
         }
-        if(boardMap.containsKey(position)) {
+        if (boardMap.containsKey(position)) {
             if (boardMap.get(position).getTitle() != null) {
                 switch (boardMap.get(position).getTitle()) {
                     case "Herança" -> {
@@ -495,7 +510,7 @@ public class GameManager {
             return null;
         }
 
-        if(boardMap.get(position).getProgrammers().isEmpty()){
+        if (boardMap.get(position).getProgrammers().isEmpty()) {
             return null;
         }
 
@@ -506,7 +521,7 @@ public class GameManager {
         return head.programmer.getId();
     }
 
-    public Programmer getCurrentPlayer(){
+    public Programmer getCurrentPlayer() {
         return currentPlayer;
     }
 
@@ -542,26 +557,26 @@ public class GameManager {
         int count = 0;
         String res = null;
 
-        if(boardMap.containsKey(currentPlayer.getPos()) && !currentPlayer.isDefeated()){
+        if (boardMap.containsKey(currentPlayer.getPos()) && !currentPlayer.isDefeated()) {
             res = boardMap.get(currentPlayer.getPos()).react(currentPlayer, dado, boardMap);
         }
-        if(currentPlayer.isDefeated()){
+        if (currentPlayer.isDefeated()) {
             head = head.next;
             tail.next = null;
             tail.next = head;
             count++;
             nrTurnos++;
         }
-        if(count == 0) {
+        if (count == 0) {
             nextNode();
         }
 
         return res;
     }
 
-    public Programmer getWinner(){
-        for(Programmer programmer : programmers){
-            if(!programmer.isDefeated()){
+    public Programmer getWinner() {
+        for (Programmer programmer : programmers) {
+            if (!programmer.isDefeated()) {
                 return programmer;
             }
         }
@@ -570,18 +585,18 @@ public class GameManager {
 
     public boolean gameIsOver() {
         int countGameOver = 0;
-        for(Programmer programmer : programmers){
-            if(programmer.isDefeated()){
+        for (Programmer programmer : programmers) {
+            if (programmer.isDefeated()) {
                 countGameOver++;
             }
         }
         if (boardMap.get(boardMap.size()) != null) {
-            if(countGameOver == programmers.size() - 1) {
+            if (countGameOver == programmers.size() - 1) {
                 return true;
-            }else if(!boardMap.get(boardMap.size()).getProgrammers().isEmpty()){
+            } else if (!boardMap.get(boardMap.size()).getProgrammers().isEmpty()) {
                 Programmer programmerSave = boardMap.get(boardMap.size()).getProgrammers().get(0);
                 programmers.remove(boardMap.get(boardMap.size()).getProgrammers().get(0));
-                for(Programmer programmer : programmers){
+                for (Programmer programmer : programmers) {
                     programmer.gotDefeated();
                 }
                 programmers.add(programmerSave);
@@ -596,8 +611,8 @@ public class GameManager {
 
         List<String> results = new ArrayList<>();
         List<Programmer> programmers = new ArrayList<>();
-        for(int x = boardMap.size() ; x > 0 ; x--) {
-            if(getProgrammers(x) != null) {
+        for (int x = boardMap.size(); x > 0; x--) {
+            if (getProgrammers(x) != null) {
                 programmers.addAll(getProgrammers(x));
             }
         }
@@ -660,7 +675,7 @@ public class GameManager {
                     return res.toString();
                 }
                 res.append(" | ");
-            }else {
+            } else {
                 i++;
             }
 
