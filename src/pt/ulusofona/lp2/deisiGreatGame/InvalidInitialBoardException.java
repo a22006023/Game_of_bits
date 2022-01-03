@@ -1,9 +1,9 @@
 package pt.ulusofona.lp2.deisiGreatGame;
 
 public class InvalidInitialBoardException extends Exception{
-    private String message;
-    private int id;
-    private boolean isTool;
+    private final String message;
+    private final int id;
+    private final boolean isTool;
 
     InvalidInitialBoardException(String message, int id, boolean isTool){
         this.message = message;
