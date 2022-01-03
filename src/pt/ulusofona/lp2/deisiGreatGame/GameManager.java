@@ -133,7 +133,7 @@ public class GameManager {
             if (head.next != tail) {
                 result.append("Player: ").append(head.next.getProgrammer().toStringToFile()).append("\n");
             }
-            if (head.next.next != tail) {
+            if (head.next.next != tail && programmers.size() != 2) {
                 result.append("Player: ").append(head.next.next.getProgrammer().toStringToFile()).append("\n");
             }
             result.append("Player: ").append(tail.getProgrammer().toStringToFile()).append("\n");
@@ -192,11 +192,12 @@ public class GameManager {
 
                 line = line.replace("Player: ", "");
                 String[] playerData = line.split("/");
-
-                playerInfo[x][0] = playerData[0];
-                playerInfo[x][1] = playerData[1];
-                playerInfo[x][2] = playerData[6];
-                playerInfo[x][3] = playerData[2];
+                if(x < playerInfo.length) {
+                    playerInfo[x][0] = playerData[0];
+                    playerInfo[x][1] = playerData[1];
+                    playerInfo[x][2] = playerData[6];
+                    playerInfo[x][3] = playerData[2];
+                }
 
                 if (!playerData[7].equals("No tools")) {
 
