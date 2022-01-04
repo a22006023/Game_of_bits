@@ -60,3 +60,11 @@ fun router() : Function1<CommandType,Function2<GameManager,List<String>,String?>
      return null
  }
 
+
+ fun postMove(game: GameManager,args : List<String>) : String?{
+    return null
+ }
+
+ fun postAbyss(game: GameManager,args : List<String>) : String?{
+    return null
+ }
