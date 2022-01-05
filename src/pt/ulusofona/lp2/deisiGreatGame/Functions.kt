@@ -72,7 +72,7 @@ fun getPolyglots(game: GameManager,args : List<String>) : String?{
 
 fun getMostUsedPositions(game: GameManager,args : List<String>) : String?{
     var result = "";
-    game.getBoardMap().sortedBy { it.getNumSteps() }
+    game.boardMapValues.sortedBy { it.getNumSteps() }
         .reversed()
         .take(args[1].toInt())
         .forEach { result += "\n" + it.getPos().toString() + ":" + it.getNumSteps().toString() }

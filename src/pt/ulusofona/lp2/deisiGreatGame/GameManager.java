@@ -531,7 +531,7 @@ public class GameManager {
         return currentPlayer;
     }
 
-    public List<Square> getBoardMap() {
+    public List<Square> getBoardMapValues() {
         return new ArrayList<>(boardMap.values());
     }
 
