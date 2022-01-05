@@ -9,11 +9,11 @@ public abstract class Square {
     protected List<Programmer> programmers = new ArrayList<>();
     protected final int abyssOrTool;
     protected final int id;
-    protected String title;
+    protected String title = "Empty";
     protected int pos;
     protected int numSteps = 0;
 
-    public Square(int abyssOrTool,int id,int pos){
+    public Square(int abyssOrTool, int id, int pos){
         this.abyssOrTool = abyssOrTool;
         this.id = id;
         this.pos = pos;
@@ -21,7 +21,6 @@ public abstract class Square {
 
     public Square(int pos){
         this.id = -1;
-        this.title = null;
         this.pos = pos;
         abyssOrTool = -1;
     }

@@ -101,5 +101,7 @@ fun postMove(game: GameManager,args : List<String>) : String?{
 }
 
 fun postAbyss(game: GameManager,args : List<String>) : String?{
+
+    game.checkAbyss(args[1].toInt(), args[2].toInt())
     return null
 }
