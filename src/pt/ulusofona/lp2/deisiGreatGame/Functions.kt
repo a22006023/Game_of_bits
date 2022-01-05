@@ -89,6 +89,7 @@ fun getMostUsedAbysses(game: GameManager,args : List<String>) : String?{
         .sortedBy { it.getNumSteps() }
         .reversed()
         .distinctBy { it.getTitle() }
+        .take(args[1].toInt())
         .forEach { result += "\n" + it.getTitle().toString() + ":" + it.getNumSteps().toString() }
 
     result = result.replaceFirstChar { "" }
