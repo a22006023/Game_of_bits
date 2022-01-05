@@ -44,6 +44,7 @@ fun getPlayersByLanguage(game: GameManager,args: List<String>) : String?{
         result += "," + programmer.name
     }
     }
+
     result = result.replaceFirstChar { "" }
     return result
 }
