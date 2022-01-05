@@ -39,11 +39,9 @@ fun commandPost(game: GameManager, args : List<String>) : String? {
 
 fun getPlayer(game: GameManager,args : List<String>) : String? {
 
-    return if(game.getProgrammers(true)
-            .filter { it.firstName == args[1]}.size == 1){
-        game.getProgrammers(true)
-            .filter { it.firstName == args[1]}[0].toString()
-    }else{
+    return if(game.getProgrammers(true).filter { it.firstName == args[1]}.size == 1){
+        game.getProgrammers(true).filter { it.firstName == args[1]}[0].toString()
+    } else {
         "Inexistent player"
     }
 
@@ -103,7 +101,11 @@ fun postMove(game: GameManager,args : List<String>) : String?{
 }
 
 fun postAbyss(game: GameManager,args : List<String>) : String?{
-
-    game.checkAbyss(args[1].toInt(), args[2].toInt())
-    return null
+    return if (game.getBoardMap()[args[2].toInt()].getId() == - 1) {
+        val abyss = game.checkAbyss(args[1].toInt(), args[2].toInt())
+        game.getBoardMap()[args[2].toInt()] = abyss
+        return "OK"
+    } else {
+        "Position is occupied"
+    }
 }

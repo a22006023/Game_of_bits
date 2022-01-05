@@ -9,7 +9,7 @@ public abstract class Square {
     protected List<Programmer> programmers = new ArrayList<>();
     protected final int abyssOrTool;
     protected final int id;
-    protected String title = "Empty";
+    protected String title;
     protected int pos;
     protected int numSteps = 0;
 
@@ -22,6 +22,7 @@ public abstract class Square {
     public Square(int pos){
         this.id = -1;
         this.pos = pos;
+        this.title = null;
         abyssOrTool = -1;
     }
 
