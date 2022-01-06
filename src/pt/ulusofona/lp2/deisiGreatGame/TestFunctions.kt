@@ -187,6 +187,7 @@ internal class TestFunctions {
         result = commandGetFn?.invoke(manager,listOf("ABYSS","5","14"))
 
         assertEquals("Position is occupied",result)
+        assertEquals("0,6,14", manager.getBoardMap()[14].toString())
 
 
     }
