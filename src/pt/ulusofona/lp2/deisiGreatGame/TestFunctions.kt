@@ -1,7 +1,6 @@
 package pt.ulusofona.lp2.deisiGreatGame
 
 import org.junit.Test
-import java.util.*
 import kotlin.test.assertEquals
 
 var abyssesAndTools = arrayOf(
@@ -30,17 +29,8 @@ var playerInfo = arrayOf(
     arrayOf("16", "Alb erto", "Beck", "Brown")
 )
 
-var languages1 = arrayOf("PHP", "Java")
-var languages2 = arrayOf("Java", "C++", "Python", "Portugues")
-var languages3 = arrayOf("Beck")
 
-var tree1 = TreeSet(Arrays.asList(*languages1))
-var tree2 = TreeSet(Arrays.asList(*languages2))
-var tree3 = TreeSet(Arrays.asList(*languages3))
 
-var sranene = Programmer("sra nene", 28, tree1, ProgrammerColor.PURPLE)
-var robroche = Programmer("rob roche", 31, tree2, ProgrammerColor.BLUE)
-var alberto = Programmer("Alb erto", 16, tree3, ProgrammerColor.BROWN)
 
 internal class TestFunctions {
     private val manager: GameManager = GameManager()
@@ -93,18 +83,113 @@ internal class TestFunctions {
     fun test01GetMostUsedPositions() {
 
         manager.createInitialBoard(playerInfo, 30, abyssesAndTools)
-
+        manager.moveCurrentPlayer(2)
+        manager.reactToAbyssOrTool()
+        manager.moveCurrentPlayer(3)
+        manager.reactToAbyssOrTool()
+        manager.moveCurrentPlayer(2)
+        manager.reactToAbyssOrTool()
+        manager.moveCurrentPlayer(1)
+        manager.reactToAbyssOrTool()
+        manager.moveCurrentPlayer(4)
+        manager.reactToAbyssOrTool()
+        manager.moveCurrentPlayer(3)
+        manager.reactToAbyssOrTool()
+        manager.moveCurrentPlayer(5)
+        manager.reactToAbyssOrTool()
+        manager.moveCurrentPlayer(1)
+        manager.reactToAbyssOrTool()
+        manager.moveCurrentPlayer(3)
+        manager.reactToAbyssOrTool()
+        manager.moveCurrentPlayer(6)
         manager.reactToAbyssOrTool()
 
         val routerFn = router()
         val commandGetFn = routerFn.invoke(CommandType.GET)
 
-        val result = commandGetFn?.invoke(manager, listOf("POLYGLOTS", ""))
-        assertEquals("sra nene:2\n" +
-                "rob roche:4", result)
+        val result = commandGetFn?.invoke(manager, listOf("MOST_USED_POSITIONS", "5"))
+        assertEquals("9:2\n" +
+                "8:2\n" +
+                "4:2\n" +
+                "3:2\n" +
+                "15:1", result)
+
 
     }
 
+    @Test
+    fun test01GetMostUsedAbyss(){
+
+        manager.createInitialBoard(playerInfo,30, abyssesAndTools)
+
+        manager.moveCurrentPlayer(6)
+        manager.reactToAbyssOrTool()
+        manager.moveCurrentPlayer(6)
+        manager.reactToAbyssOrTool()
+        manager.moveCurrentPlayer(6)
+        manager.reactToAbyssOrTool()
+        manager.moveCurrentPlayer(1)
+        manager.reactToAbyssOrTool()
+        manager.moveCurrentPlayer(1)
+        manager.reactToAbyssOrTool()
+        manager.moveCurrentPlayer(2)
+        manager.reactToAbyssOrTool()
+        manager.moveCurrentPlayer(1)
+        manager.reactToAbyssOrTool()
+        manager.moveCurrentPlayer(3)
+        manager.reactToAbyssOrTool()
+        manager.moveCurrentPlayer(5)
+        manager.reactToAbyssOrTool()
+
+        val routerFn = router()
+        val commandGetFn = routerFn.invoke(CommandType.GET)
+
+        val result = commandGetFn?.invoke(manager, listOf("MOST_USED_ABYSSES", "10"))
+        assertEquals("Erro de lógica:2\n" +
+                "Erro de sintaxe:2\n" +
+                "Efeitos secundários:1\n" +
+                "File Not Found Exception:1\n" +
+                "Exception:0\n" +
+                "Segmentation Fault:0\n" +
+                "Ciclo infinito:0\n" +
+                "Blue Screen of Death:0\n" +
+                "Duplicated Code:0\n" +
+                "Crash (aka Rebentanço):0",result)
+
+    }
+
+    @Test
+    fun test01PostMove(){
+
+        manager.createInitialBoard(playerInfo,30, abyssesAndTools)
+
+        val routerFn = router()
+        val commandGetFn = routerFn.invoke(CommandType.POST)
+
+        val result = commandGetFn?.invoke(manager, listOf("MOVE", "4"))
+
+        assertEquals("Uhhh agora podes te safar de algumas exceções bem chatas *Tratamento de Excepções was added to your inventory*",result)
+        assertEquals("[16 | Alb erto | 5 | Tratamento de Excepções | Beck | Em Jogo]",manager.getProgrammers(5).toString())
+
+    }
+
+    @Test
+    fun test01PostAbyss(){
+        manager.createInitialBoard(playerInfo,30, abyssesAndTools)
+
+        val routerFn = router()
+        val commandGetFn = routerFn.invoke(CommandType.POST)
+
+        var result = commandGetFn?.invoke(manager, listOf("ABYSS", "3","23"))
+        assertEquals("OK",result)
+        assertEquals("0,3,23", manager.getBoardMap()[23].toString())
+
+        result = commandGetFn?.invoke(manager,listOf("ABYSS","5","14"))
+
+        assertEquals("Position is occupied",result)
+
+
+    }
 }
 
 
