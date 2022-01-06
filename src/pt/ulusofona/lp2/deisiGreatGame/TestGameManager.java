@@ -87,7 +87,7 @@ public class TestGameManager {
     }
 
 
-  /*  @Test
+  @Test
     public void test01CreateInitialBoard() {
         int boardSize = 28;
         boolean resultado = game.createInitialBoard(playerInfo, boardSize);
@@ -230,8 +230,13 @@ public class TestGameManager {
                 {"1","1","2"},
                 {"0","9","5"}
         };
-        assertTrue(game.createInitialBoard(playerInfo,20,abyssesAndTools11));
-    }*/
+        try {
+            game.createInitialBoard(playerInfo,20,abyssesAndTools11);
+        } catch (InvalidInitialBoardException e) {
+            e.printStackTrace();
+            fail("Não devia ter dado InvalidInitialBoardException");
+        }
+    }
 
     @Test
     public void test01getProgrammers() throws InvalidInitialBoardException {
@@ -291,7 +296,7 @@ public class TestGameManager {
 
     }
 
-/*
+
     @Test
     public void test01moveCurrentPlayer() {
         int boardSize = 30;
@@ -1025,6 +1030,6 @@ public class TestGameManager {
     public void test01Main(){
         String[] teste = new String[1];
         Main.main(teste);
-    }*/
+    }
 
 }
