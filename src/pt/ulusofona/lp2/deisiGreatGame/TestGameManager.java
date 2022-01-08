@@ -810,6 +810,7 @@ public class TestGameManager {
             
             fail("Não devia ter dado InvalidInitialBoardException");
         }
+        game.checkTool(-1,-1,"olaa");
         game.moveCurrentPlayer(6);//Alberto vai po 7
         game.reactToAbyssOrTool();
         game.moveCurrentPlayer(4);//sranene vai po 5

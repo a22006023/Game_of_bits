@@ -96,8 +96,7 @@ fun getMostUsedAbysses(game: GameManager,args : List<String>) : String?{
 
 fun postMove(game: GameManager,args : List<String>) : String?{
     game.moveCurrentPlayer(args[1].toInt())
-    val result = game.reactToAbyssOrTool()
-    return result ?: "OK"
+    return game.reactToAbyssOrTool() ?: "OK"
 }
 
 fun postAbyss(game: GameManager,args : List<String>) : String?{
